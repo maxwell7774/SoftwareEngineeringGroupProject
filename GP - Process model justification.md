@@ -16,7 +16,6 @@ Adding more functions for our project. If we still have extra time, we can add s
 2. Make sure we can finish it on time. Every time we complete an increment, the software is complete and can be submitted. This project is a course assignment, which means we have an irrevocable deadline. In order to ensure that the project is completed before the deadline, we choose the incremental mode, which is a relatively safe mode.
 
 ## What makes this model ideal for your project/team? 
-	There are three reason why this model ideal for our team:
 1. This model can prefer our project. Our team will write a game as a basic function of our project. The incremental model would help us to add additional functions later. Keeping on updating the function of our project in order to attract user’s interest.
 2. This model can simplify the problem. The Incremental Model can also help our team members to focus on the achievement of some specific functions.
 3. This model can help us to review the step of creating a project linearly. The point of this project is to sort out what we've learned from this lecture. Choosing an incremental mode helps us step through the project's challenges. This will help us to better organize the knowledge related to this lecture. It is very difficult to deal with all the problems at once, which is a difficult task for a beginner like me. Therefore, I think the incremental model is a perfect model for my project.
