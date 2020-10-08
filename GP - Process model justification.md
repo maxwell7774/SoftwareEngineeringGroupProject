@@ -9,8 +9,8 @@ We chose this model because it lets us get a working rendition out quickly. This
 
 ## What makes this model ideal for your project/team?
 
-We'd like to build a game with basic function. The incremental model will allow us to implement new features later on. With each update it will keep the players entertained with new features and objectives.
-It is also beneficial to us because we have a small team. This will help us not to spread ourselves to thin across all our goals at first, but it will keep us focused on the basic functionality of the game at first.
+- We'd like to build a game with basic function. The incremental model will allow us to implement new features later on. With each update it will keep the players entertained with new features and objectives.
+- It is also beneficial to us because we have a small team. This will help us not to spread ourselves to thin across all our goals at first, but it will keep us focused on the basic functionality of the game at first.
 
 ## How will your team carry out this model?
 
