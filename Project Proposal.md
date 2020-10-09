@@ -6,7 +6,7 @@
 
 ### I. Clients and Stakeholders
 - Adam Maxwell, maxwell7774@gmail.com
-- Yucheng Long
+- Yucheng Long, yuchenglong@suumail.com
 - Bryce Mecham, bdmecham@gmail.com
 
 ### II. Project Description
