@@ -33,10 +33,14 @@ ___
 
 ___
 
-## Purpose for this meeting: 
+## Purpose for this meeting: Project Proposal, Fixing the Process Model Justification
 
-### Date/Time:
+### Date/Time: 10/08/2020 5:30pm
 
-### Attendees: 
+### Attendees: Bryce Mecham, Adam Maxwell, Yucheng Long
 
 ### Notes:
+- Revised the Process Model Justification. 
+- Talked about what stuff want to use for the game, what kind of game we would like to make, and the story line of the game.
+- Found some open art we can use and decided a storyline.
+- Created and completed the Project Proposal.
