@@ -2,7 +2,7 @@
 #### Ver 1.0
 ### Team Name: BAMM Developers
 ### Team Members: Bryce Mecham, Adam Maxwell, Yucheng Long
-### Primary Author of this Document: List the team member or members responsible for final editing and formatting of this document. 
+### Primary Author of this Document: Bryce Mecham, Adam Maxwell, and Yucheng Long
 
 ### I. Clients and Stakeholders
 - Adam Maxwell, maxwell7774@gmail.com
