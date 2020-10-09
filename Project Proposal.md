@@ -34,6 +34,6 @@ To get approval from our instructor we will submit this proposal and will get wr
 - Team Member Approval:
   -
   -
-  -Bryce Mecham 10/08/2020
+  - Bryce Mecham 10/08/2020
 ### VI. Log
 History of this document to include inception and revisions made. 
