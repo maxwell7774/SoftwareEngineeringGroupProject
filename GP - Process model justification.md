@@ -1,28 +1,25 @@
 # GP-Process Model Justification
+By, Yucheng Long, Bryce Mecham, and Adam Maxwell
 
 ## Describe the model we are going to use for our development. 
 
 Incremental Model
 
-The incremental model uses linear order to complete the project, and the addition of each increment means the further improvement of the project. Following are the meanings of each increments:
-1. The first incremental mode is the basic function of software.
-2. The second incremental mode is a more complex basic function for the project.
-3. The third (or latter) incremental mode is an additional function which helps improve user experience.
+The incremental model releases "increments" of a program. Each increment is run through requirements, design, coding, and testing. Then it is released. This gives an early release of a product without maybe having all the features implemented already. Then it allows you to release more increments after which allows for added features and bug fixes.
+1. The first increment we will release will focus mainly on implementing our primary goals. This will ensure that we have a working project that we can get credit for.
+2. The second increment we will release will focus on our secondary goals, and bug fixes. This will allow us to keep the users entertained with new features as well as fixing problems that may have been in the first increment.
+3. The third iincrement we will focus on our tertiary goals, and bug fixes. Doing this allows us to have working project early, and lets us break up the tasks into more manageable parts so we're more likely to reach our more unlikely goals.
+4. The increments may go on depending on what the clients would like.
 
 
 ## Thoroughly justify why this is the model you are choosing. Why did you choose this model? 
-1. I am choosing this model because it can help us to finish our project better. Following is the benefit of Incremental Model:
-Adding more functions for our project. If we still have extra time, we can add some additional function to our project. This step can be proceeded over and over again.
-2. Make sure we can finish it on time. Every time we complete an increment, the software is complete and can be submitted. This project is a course assignment, which means we have an irrevocable deadline. In order to ensure that the project is completed before the deadline, we choose the incremental mode, which is a relatively safe mode.
+- The reason we chose this model is because we have a deadline for this project to be completed. Because we have a deadline, we need to have the bare minimum done first so we can focus on adding more features after. This is incrementing our project. We are starting with a base working project and iterating on top of it to make it better and implement more features.
+- Choosing the incremental model also allows us to fix bugs incrementally instead of whenever they appear if its not a game breaking bug.
+- As team, we want to make this game nice, so we are going to plan, code, test and make sure the users have a great experience. Using the incremental model allows us to listen to our user reviews, and implement ideas they may have as well into the next increment.
 
 ## What makes this model ideal for your project/team? 
-1. This model can prefer our project. Our team will write a game as a basic function of our project. The incremental model would help us to add additional functions later. Keeping on updating the function of our project in order to attract user’s interest.
-2. This model can simplify the problem. The Incremental Model can also help our team members to focus on the achievement of some specific functions.
-3. This model can help us to review the step of creating a project linearly. The point of this project is to sort out what we've learned from this lecture. Choosing an incremental mode helps us step through the project's challenges. This will help us to better organize the knowledge related to this lecture. It is very difficult to deal with all the problems at once, which is a difficult task for a beginner like me. Therefore, I think the incremental model is a perfect model for my project.
+- Since we have a small team, we need a way to break down the tasks. This is so we don't feel overwhelmed, and so we can see progress early on. The incremental model helps us accomplish this. The increments allow us to break down our goals into more manageable pieces. Then as we increment we can add more and more of our goals/features.
+- The incremental model is perfect to develop a game with. The game could start out with basic features that may get a user hooked. Then when you increment the game and update it, this will bring more features to the game and keep the user interested in the game instead of the user getting bored and deleting the game.
 
 ## How will your team carry out this model?
-1. First, we will write a basic game. Then, we will add some additional function to the game.
-When we have decided on the theme of the game, we will use the following step: 
-we will discuss what the first increment of our project will be. The first increment must be completed before the deadline because it is a course assignment. 
-2. We will discuss what the second increment is. Our plan is that the second increment will further refine our game, for example by fixing some bugs or modifying the rules of the game. 
-3. Finally, we will add some additional features to make the game more interesting.
+We will meet together as a team and plan what needs to be done. Then we will make assignments to people. We the can split off and start working on our assignments. Then we can move onto testing. We will also have a deadline for when the first increment needs to be done. This deadline will be before the project is due, so we have time to add some of our stretch goals in the increments after the first one. We have all members of our team who will be programming. Then we have 2 members designated for testing and one for code quality assurance. By doing these things, we will be able to release our first increment. Then we will repeat these steps for as many increments that we need.
