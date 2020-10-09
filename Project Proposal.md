@@ -10,14 +10,16 @@
 - Bryce Mecham, bdmecham@gmail.com
 
 ### II. Project Description
-To create a platformer type game that is cross platform. 
+Our goal is to create a platformer game that can be used  across platforms.
 ### III. Language and Resources
-List and/or describe the programming language you intend to use and any other resources you are going to obtain along with any associated costs. Not being able to obtain these resources will result in you having to create a new proposal. 
+We are going to use c++ as our language. We chose C++ because we are also going to use Cocos2d-x which is a game engine that allows for cross platform. Assests for our game will be from opengameart.org which provides open source game assets. Everything we use should be free to use so our cost will be $0.
 
 ### IV. Project Goals
 List all of your project goals divided up into primary, secondary and tertiary goals. 
-- Primary goals - goals you are 100% committed to completing
-- Secondary goals - goals you “think” you’ll be able to complete
+- Primary goals 
+  - Build a platformer game that is cross platform.
+- Secondary goals 
+  - 
 - Tertiary goals
   - Random levels/ infinite generation
 
