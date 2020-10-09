@@ -28,11 +28,11 @@ List all of your project goals divided up into primary, secondary and tertiary g
 ### V. Approvals
 To get approval from our instructor we will submit this proposal and will get written approval back. As clients and team members we can type our name with the date for approval.
 - Client Approval:
-  -
+  - Adam Maxwell 10/08/2020
   -
   - Bryce Mecham 10/08/2020
 - Team Member Approval:
-  -
+  - Adam Maxwell 10/08/2020
   -
   - Bryce Mecham 10/08/2020
 ### VI. Log
