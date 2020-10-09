@@ -18,8 +18,7 @@ We are going to use c++ as our language. We chose C++ because we are also going 
 List all of your project goals divided up into primary, secondary and tertiary goals. 
 - Primary goals 
   - Build a platformer game that is cross platform.
-- Secondary goals 
-  - 
+- Secondary goals
 - Tertiary goals
   - Random levels/ infinite generation
 
