@@ -25,7 +25,7 @@
 
 [2.6. Assumptions and dependencies](https://github.com/maxwell7774/SoftwareEngineeringGroupProject/blob/master/Requirements%20Documentation.md#26-assumptions-and-dependencies)
 
-[Section 3](https://github.com/maxwell7774/SoftwareEngineeringGroupProject/blob/master/Requirements%20Documentation.md#section-3-functional-requirements)
+[Section 3](https://github.com/maxwell7774/SoftwareEngineeringGroupProject/blob/master/Requirements%20Documentation.md#section-3)
 
 [3. System Features](https://github.com/maxwell7774/SoftwareEngineeringGroupProject/blob/master/Requirements%20Documentation.md#3-system-features)
 
@@ -46,6 +46,9 @@
 [Appendix B](https://github.com/maxwell7774/SoftwareEngineeringGroupProject/blob/master/Requirements%20Documentation.md#appendix-b-one-other-diagram)
 
 ## Revision history
+Version | Author | Date
+--------|--------|-----
+
 
 ## Sections 1-2:
 
