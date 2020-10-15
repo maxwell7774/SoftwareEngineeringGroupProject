@@ -37,7 +37,7 @@
 
 [3.1.3. Functional requirements](https://github.com/maxwell7774/SoftwareEngineeringGroupProject/blob/master/Requirements%20Documentation.md#313-functional-requirements)
 
-[Section 4](Section 4)
+[Section 4](https://github.com/maxwell7774/SoftwareEngineeringGroupProject/blob/master/Requirements%20Documentation.md#section-4)
 
 [4. Nonfunctional Requirements](https://github.com/maxwell7774/SoftwareEngineeringGroupProject/blob/master/Requirements%20Documentation.md#4-nonfunctional-requirements)
 
@@ -71,7 +71,7 @@
 
 #### 2.6. Assumptions and dependencies
 
-## Section 3 (functional requirements):
+## Section 3:
 
 ### 3. System Features
 
