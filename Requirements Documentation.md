@@ -29,7 +29,7 @@
 
 [3. System Features](https://github.com/maxwell7774/SoftwareEngineeringGroupProject/blob/master/Requirements%20Documentation.md#3-system-features)
 
-[3.1. Functional requirement X](https://github.com/maxwell7774/SoftwareEngineeringGroupProject/blob/master/Requirements%20Documentation.md#31-functional-requirement-x)
+[3.1. Functional requirement 1](https://github.com/maxwell7774/SoftwareEngineeringGroupProject/blob/master/Requirements%20Documentation.md#31-functional-requirement-1)
 
 [3.1.1. Description and priority](https://github.com/maxwell7774/SoftwareEngineeringGroupProject/blob/master/Requirements%20Documentation.md#311-description-and-priority)
 
@@ -37,9 +37,25 @@
 
 [3.1.3. Functional requirements](https://github.com/maxwell7774/SoftwareEngineeringGroupProject/blob/master/Requirements%20Documentation.md#313-functional-requirements)
 
+[3.2. Functional requirement 2](https://github.com/maxwell7774/SoftwareEngineeringGroupProject/blob/master/Requirements%20Documentation.md#32-functional-requirement-2)
+
+[3.2.1. Description and priority](https://github.com/maxwell7774/SoftwareEngineeringGroupProject/blob/master/Requirements%20Documentation.md#321-description-and-priority)
+
+[3.2.2. Stimulus and response](https://github.com/maxwell7774/SoftwareEngineeringGroupProject/blob/master/Requirements%20Documentation.md#322-stimulus-and-response)
+
+[3.2.3. Functional requirements](https://github.com/maxwell7774/SoftwareEngineeringGroupProject/blob/master/Requirements%20Documentation.md#323-functional-requirements)
+
 [Section 4](https://github.com/maxwell7774/SoftwareEngineeringGroupProject/blob/master/Requirements%20Documentation.md#section-4)
 
 [4. Nonfunctional Requirements](https://github.com/maxwell7774/SoftwareEngineeringGroupProject/blob/master/Requirements%20Documentation.md#4-nonfunctional-requirements)
+
+[4.1 Nonfunctional Requirement 1](https://github.com/maxwell7774/SoftwareEngineeringGroupProject/blob/master/Requirements%20Documentation.md#41-nonfunctional-requirement-1)
+
+[4.1.1 Description](https://github.com/maxwell7774/SoftwareEngineeringGroupProject/blob/master/Requirements%20Documentation.md#411-description)
+
+[4.2 Nonfunctional Requirement 2](https://github.com/maxwell7774/SoftwareEngineeringGroupProject/blob/master/Requirements%20Documentation.md#42-nonfunctional-requirement-2)
+
+[4.2.1 Description](https://github.com/maxwell7774/SoftwareEngineeringGroupProject/blob/master/Requirements%20Documentation.md#421-description)
 
 [Appendix A](https://github.com/maxwell7774/SoftwareEngineeringGroupProject/blob/master/Requirements%20Documentation.md#appendix-a-class-diagram)
 
@@ -120,16 +136,16 @@ We will have to have art assests for the environment, be able to decide which ob
 
 ## Section 4:
 ### 4. Nonfunctional Requirements
-#### 4.1  Nonfunctional Requirement 1
+#### 4.1 Nonfunctional Requirement 1
 Music/sound effects
 ##### 4.1.1 Description
 Music will be playing throughout the game. The music can change with each level. Sound effect can also be used when the character gets hurt or when they finish the level.
 
-#### 4.2  Nonfunctional Requirement 2
-Animations
+#### 4.2 Nonfunctional Requirement 2
+Game Animations
 ##### 4.2.1 Description
 The environment and the character will have animation to give a more polished and finished feel to the game.
 
 ## Appendix A: Class Diagram:
-[Class Diagram](https://github.com/maxwell7774/SoftwareEngineeringGroupProject/blob/master/Class_Diagram.png)
+![Class Diagram](https://github.com/maxwell7774/SoftwareEngineeringGroupProject/blob/master/Class_Diagram.png)
 ## Appendix B: One other diagram:
