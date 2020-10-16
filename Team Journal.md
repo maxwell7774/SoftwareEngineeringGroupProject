@@ -44,3 +44,14 @@ ___
 - Talked about what stuff want to use for the game, what kind of game we would like to make, and the story line of the game.
 - Found some open art we can use and decided a storyline.
 - Created and completed the Project Proposal.
+
+___
+
+## Purpose for this meeting: Creating the SRS
+
+### Date/Time: 10/15/2020 5:30pm
+
+### Attendees: Bryce Mecham, Adam Maxwell
+
+### Notes:
+- We got through most of the SRS and talked about how the game will work.
