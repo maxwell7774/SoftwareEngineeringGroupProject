@@ -59,12 +59,13 @@
 
 [Appendix A](https://github.com/maxwell7774/SoftwareEngineeringGroupProject/blob/master/Requirements%20Documentation.md#appendix-a-class-diagram)
 
-[Appendix B](https://github.com/maxwell7774/SoftwareEngineeringGroupProject/blob/master/Requirements%20Documentation.md#appendix-b-one-other-diagram)
+[Appendix B](https://github.com/maxwell7774/SoftwareEngineeringGroupProject/blob/master/Requirements%20Documentation.md#appendix-b-activity-diagram)
 
 ## Revision history
 Version | Author | Date
 --------|--------|-----
 Version 1.0 | Bryce Mecham | 10/15/2020
+Version 1.1 | Bryce Mecham | 10/16/2020
 
 ## Sections 1-2:
 
@@ -101,7 +102,7 @@ Our goal is to be able to put it on mobile Devices.
 - We are a smaller team, so our game can't be too large. 
 - Time is our biggest constraint, because we have to have this completed by the end of the Fall 2020 semester.
 #### 2.5. User documentation
-
+User documentation will be found within our [respository](https://github.com/maxwell7774/SoftwareEngineeringGroupProject).
 #### 2.6. Assumptions and dependencies
 Assumptions
 - We assume that our users will have an android device.
@@ -113,39 +114,39 @@ Dependencies
 
 ### 3. System Features
 
-Music
-Animation
-
 #### 3.1. Functional requirement 1
-Player will be able to control the character.
+The Player has to be able to control the character.
 ##### 3.1.1. Description and priority
-The player will be able to control the character like moving around the level, and interacting with the environment. This will be a high priority.
+The player will be able to control the character for actions like moving around the level, and interacting with the environment. This essential to the game.
 ##### 3.1.2. Stimulus and response
-The player will use swipe gestures or maybe like a virtual joystick/ buttons to control the Character, in response the character could move, jump, duck, grab, throw, etc.
+- Stimulus: The user will use swipe gestures or a virtual joystick/ buttons to control the Character.
+- Response: The character will run, jump, duck, grab, throw, etc.
 ##### 3.1.3. Functional requirements
-We will need to capture user input inorder to move the character in response.
+Feature ID: FR-1
 
 #### 3.2. Functional requirement 2
-There will be different levels that the player can progress through.
+We have graphics rendering to the screen.
 ##### 3.2.1. Description and priority
-There will be different levels, some more difficult than others, that the player can progress through.
+The character and the environment have to be viewable inorder to play the game. This is essential to the game. 
 ##### 3.2.2. Stimulus and response
-The level will have puzzle elements, and the player will be able to onto objects, or avoid other objects within the level. The goal will be to collect a key or a part to fix the alien's spaceship.
+- Stimulus: The objects positions are updated.
+- Response: The graphics will be updeated to the new positions.
 ##### 3.2.3. Functional requirements
-We will have to have art assests for the environment, be able to decide which objects hurt the player, and which objects the player can stand on or pass through.
+Feature ID: FR-2
 
 ## Section 4:
 ### 4. Nonfunctional Requirements
 #### 4.1 Nonfunctional Requirement 1
-Music/sound effects
+The game must be developed in C++.
 ##### 4.1.1 Description
-Music will be playing throughout the game. The music can change with each level. Sound effect can also be used when the character gets hurt or when they finish the level.
+In order to use Coco-2dx it must be coded in C++.
 
 #### 4.2 Nonfunctional Requirement 2
-Game Animations
+The game must use Coco-2dx.
 ##### 4.2.1 Description
-The environment and the character will have animation to give a more polished and finished feel to the game.
+Coco-2dx is the game engine we will use, and it allows us to release the game on multiple platforms such as Android and IOS.
 
 ## Appendix A: Class Diagram:
 ![Class Diagram](https://github.com/maxwell7774/SoftwareEngineeringGroupProject/blob/master/Class_Diagram.png)
-## Appendix B: One other diagram:
+## Appendix B: Activity Diagram:
+![Activity Diagram](https://github.com/maxwell7774/SoftwareEngineeringGroupProject/blob/master/Activity_Diagram.png)
