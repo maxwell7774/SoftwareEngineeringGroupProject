@@ -55,3 +55,16 @@ ___
 
 ### Notes:
 - We got through most of the SRS and talked about how the game will work.
+
+___
+
+## Purpose for this meeting: Creating the Software Design Documentation
+### Date/Time: 10/22/2020 5:45pm
+
+### Attendees: Bryce Mecham, Adam Maxwell, Yucheng Long
+
+### Notes:
+- Go through SRS revisions
+- Create the Software Design Document
+  - Layered vs Object-Oriented?
+  - Split up who was working on what.
