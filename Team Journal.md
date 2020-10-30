@@ -68,3 +68,14 @@ ___
 - Create the Software Design Document
   - Layered vs Object-Oriented?
   - Split up who was working on what.
+  
+  ___
+
+## Purpose for this meeting: Fixing the Software Design Documentation
+### Date/Time: 10/29/2020 6:00pm
+
+### Attendees: Bryce Mecham, Adam Maxwell, Yucheng Long
+
+### Notes:
+- Fix the SDD (hopefully)
+- Uploaded the SDD
