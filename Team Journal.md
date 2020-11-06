@@ -68,8 +68,8 @@ ___
 - Create the Software Design Document
   - Layered vs Object-Oriented?
   - Split up who was working on what.
-  
-  ___
+
+___
 
 ## Purpose for this meeting: Fixing the Software Design Documentation
 ### Date/Time: 10/29/2020 6:00pm
@@ -79,3 +79,16 @@ ___
 ### Notes:
 - Fix the SDD (hopefully)
 - Uploaded the SDD
+
+___
+
+## Purpose for this meeting: Working on the Project!
+### Date/Time: 11/5/2020  6:30pm
+
+### Attendees: Bryce Mecham, Adam Maxwell, Yucheng Long
+
+### Notes:
+- Setting up the file for our project
+- Documentation for [cocos2d-x](https://docs.cocos.com/cocos2d-x/manual/en/)
+- Struggling trying to get it to run on Android.
+- Got the files uploaded to our repository and started playing around with the files.
