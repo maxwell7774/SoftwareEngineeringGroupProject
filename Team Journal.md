@@ -92,3 +92,12 @@ ___
 - Documentation for [cocos2d-x](https://docs.cocos.com/cocos2d-x/manual/en/)
 - Struggling trying to get it to run on Android.
 - Got the files uploaded to our repository and started playing around with the files.
+___
+
+## Purpose for this meeting: Completing the Testing Documentation
+### Date/Time: 11/12/2020  6:00pm
+
+### Attendees: Bryce Mecham, Adam Maxwell, Yucheng Long
+
+### Notes:
+- Started and completed the first version of the Testing Documentation, and came up with our testing plan. 
