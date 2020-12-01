@@ -1,3 +1,4 @@
+// Test if this actually works!
 #include "HelloWorldScene.h"
 
 USING_NS_CC;
