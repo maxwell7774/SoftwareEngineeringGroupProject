@@ -1,4 +1,4 @@
-// Test if this actually works!
+// Help... This is a pain in the butt...
 #include "HelloWorldScene.h"
 
 USING_NS_CC;
