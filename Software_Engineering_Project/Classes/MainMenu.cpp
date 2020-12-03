@@ -1,4 +1,5 @@
 #include "MainMenu.h"
+#include "Level1.h"
 
 USING_NS_CC;
 
@@ -36,7 +37,7 @@ bool MainMenu::init()
     title->setColor(Color3B::BLACK);
     this->addChild(title);
 
-    auto play = MenuItemImage::create("res/PNG/tiles/boxCrate.png", "res/PNG/tiles/boxCrate_double.png", CC_CALLBACK_1(MainMenu::menuCloseCallback, this));
+    auto play = MenuItemImage::create("res/PNG/tiles/boxCrate.png", "res/PNG/tiles/boxCrate_double.png", CC_CALLBACK_1(MainMenu::toLevel1, this));
 
     auto playText = Label::createWithSystemFont("Play", "Arial", 20);
     playText->setPosition(Vec2(Director::getInstance()->getVisibleSize().width / 2, Director::getInstance()->getVisibleSize().height / 3));
@@ -51,10 +52,12 @@ bool MainMenu::init()
 }
 
 
-void MainMenu::menuCloseCallback(Ref* pSender)
+void MainMenu::toLevel1(Ref* pSender)
 {
+
     //Close the cocos2d-x game scene and quit the application
-    Director::getInstance()->end();
+    auto level1 = Level1::createScene();
+    Director::getInstance()->replaceScene(TransitionFade::create(0.5f,level1));
 
     /*To navigate back to native iOS screen(if present) without quitting the application  ,do not use Director::getInstance()->end() as given above,instead trigger a custom event created in RootViewController.mm as below*/
 

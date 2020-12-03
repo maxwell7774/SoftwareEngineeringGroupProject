@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/proj.android.iml" filepath="$PROJECT_DIR$/.idea/modules/proj.android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Software_Engineering_Project.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Software_Engineering_Project.iml" group="proj.android/Software_Engineering_Project" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-370517624/libcocos2dx.iml" filepath="$PROJECT_DIR$/.idea/modules/-370517624/libcocos2dx.iml" group="proj.android/libcocos2dx" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/proj.android.iml" filepath="$PROJECT_DIR$/.idea/modules/proj.android.iml" group="proj.android" />
     </modules>
   </component>
 </project>
