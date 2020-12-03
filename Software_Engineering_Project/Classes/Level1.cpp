@@ -39,6 +39,10 @@ bool Level1::init()
 
     auto player = Sprite::create("res/PNG/Players/128x256/Yellow/alienYellow_stand.png");
     player->setPosition(Director::getInstance()->getVisibleSize().width / 2, Director::getInstance()->getVisibleSize().height / 2);
+    //auto playerBody = PhysicsBody::createBox(player->getContentSize(), PhysicsMaterial(0, 1, 0));
+    auto playerBody = PhysicsBody::createBox(Size(128,138), PhysicsMaterial(0, 1, 0));
+    playerBody->setPositionOffset(Vec2(0, -60));
+    player->setPhysicsBody(playerBody);
     this->addChild(player);
 
     Vector<SpriteFrame*> playerWalk;
@@ -51,6 +55,15 @@ bool Level1::init()
     Animate* animate = Animate::create(animateWalk);
 
     player->runAction(RepeatForever::create(animate));
+
+
+
+    auto edgeBody = PhysicsBody::createEdgeBox(visibleSize, PHYSICSBODY_MATERIAL_DEFAULT, 3);
+    auto edgeNode = Node::create();
+    edgeNode->setPosition(Vec2(visibleSize.width / 2 + origin.x, visibleSize.height / 2 + origin.y));
+    edgeNode->setPhysicsBody(edgeBody);
+
+    this->addChild(edgeNode);
 
     return true;
 }
