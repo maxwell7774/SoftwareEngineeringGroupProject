@@ -5,7 +5,12 @@ USING_NS_CC;
 
 Scene* Level1::createScene()
 {
-    return Level1::create();
+    auto scene = Level1::createWithPhysics();
+    scene->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
+    auto layer = Level1::create();
+    layer->SetPhysicsWorld(scene->getPhysicsWorld());
+    scene->addChild(layer);
+    return scene;
 }
 
 // Print useful error message instead of segfaulting when files are not there.
@@ -26,6 +31,11 @@ bool Level1::init()
 
     auto visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
+
+    auto map = TMXTiledMap::create("res/MapTMX/MapTest1.tmx");
+    //map->setAnchorPoint(Vec2(900, 900));
+    map->setPosition(0,-352);
+    this->addChild(map, 0, 99);
 
     auto player = Sprite::create("res/PNG/Players/128x256/Yellow/alienYellow_stand.png");
     player->setPosition(Director::getInstance()->getVisibleSize().width / 2, Director::getInstance()->getVisibleSize().height / 2);
