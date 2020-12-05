@@ -124,7 +124,7 @@ set(all_code_files
     ${GAME_SOURCE}
     )
 if(NOT ANDROID)
-    add_executable(${APP_NAME} ${all_code_files})
+    add_executable(${APP_NAME} ${all_code_files} "Classes/Player.cpp")
 else()
     add_library(${APP_NAME} SHARED ${all_code_files})
     add_subdirectory(${COCOS2DX_ROOT_PATH}/cocos/platform/android ${ENGINE_BINARY_PATH}/cocos/platform)

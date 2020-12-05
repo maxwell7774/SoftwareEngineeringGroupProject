@@ -1,5 +1,6 @@
 #include "Level1.h"
 #include <vector>
+#include "Player.h"
 
 USING_NS_CC;
 
@@ -23,7 +24,6 @@ static void problemLoading(const char* filename)
 // on "init" you need to initialize your instance
 bool Level1::init()
 {   
-    // 1. super init first
     if (!Scene::init())
     {
         return false;
@@ -33,30 +33,14 @@ bool Level1::init()
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
     auto map = TMXTiledMap::create("res/MapTMX/MapTest1.tmx");
-    //map->setAnchorPoint(Vec2(900, 900));
     map->setPosition(0,-352);
     this->addChild(map, 0, 99);
 
-    auto player = Sprite::create("res/PNG/Players/128x256/Yellow/alienYellow_stand.png");
-    player->setPosition(Director::getInstance()->getVisibleSize().width / 2, Director::getInstance()->getVisibleSize().height / 2);
-    //auto playerBody = PhysicsBody::createBox(player->getContentSize(), PhysicsMaterial(0, 1, 0));
-    auto playerBody = PhysicsBody::createBox(Size(128,138), PhysicsMaterial(0, 1, 0));
-    playerBody->setPositionOffset(Vec2(0, -60));
-    player->setPhysicsBody(playerBody);
-    this->addChild(player);
+    auto player = Player();
+    player.sprite->setPosition(Director::getInstance()->getVisibleSize().width / 2, Director::getInstance()->getVisibleSize().height / 2);
+    this->addChild(player.sprite);
 
-    Vector<SpriteFrame*> playerWalk;
-
-    playerWalk.reserve(2);
-    playerWalk.pushBack(SpriteFrame::create("res/PNG/Players/128x256/Yellow/alienYellow_walk1.png",Rect(0,0,player->getContentSize().width,player->getContentSize().height)));
-    playerWalk.pushBack(SpriteFrame::create("res/PNG/Players/128x256/Yellow/alienYellow_walk2.png",Rect(0,0,player->getContentSize().width,player->getContentSize().height)));
-
-    Animation* animateWalk = Animation::createWithSpriteFrames(playerWalk, 0.15f);
-    Animate* animate = Animate::create(animateWalk);
-
-    player->runAction(RepeatForever::create(animate));
-
-
+    player.sprite->runAction(RepeatForever::create(player.animateWalkRight));
 
     auto edgeBody = PhysicsBody::createEdgeBox(visibleSize, PHYSICSBODY_MATERIAL_DEFAULT, 3);
     auto edgeNode = Node::create();
@@ -66,18 +50,4 @@ bool Level1::init()
     this->addChild(edgeNode);
 
     return true;
-}
-
-
-void Level1::menuCloseCallback(Ref* pSender)
-{
-    //Close the cocos2d-x game scene and quit the application
-    Director::getInstance()->end();
-
-    /*To navigate back to native iOS screen(if present) without quitting the application  ,do not use Director::getInstance()->end() as given above,instead trigger a custom event created in RootViewController.mm as below*/
-
-    //EventCustom customEndEvent("game_scene_close_event");
-    //_eventDispatcher->dispatchEvent(&customEndEvent);
-
-
 }
