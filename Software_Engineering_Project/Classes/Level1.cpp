@@ -32,23 +32,20 @@ bool Level1::init()
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
     auto map = TMXTiledMap::create("res/MapTMX/MapTest1.tmx");
-    map->setPosition(0,-352);
-    this->addChild(map, 0, 99);
+    //this->addChild(map, 0, 99);
+    
+    auto background = Sprite::create("res/MapTMX/MapTest1.png");
+    auto edgeBody = PhysicsBody::createEdgeBox(background->getContentSize(), PHYSICSBODY_MATERIAL_DEFAULT, 3);
+    //edgeBody->setGravityEnable(false);
+    background->setPhysicsBody(edgeBody);
+    this->addChild(background);
 
     player = Player("Bob", "Green");
+    player.sprite->getPhysicsBody()->setGravityEnable(false);
     this->addChild(player.sprite);
-    auto camera = this->getDefaultCamera();
-    camera->setScale(2, 2);
     //this->getDefaultCamera()->setScale(0.5f);
 
     player.sprite->runAction(RepeatForever::create(player.animateWalk));
-
-    auto edgeBody = PhysicsBody::createEdgeBox(visibleSize, PHYSICSBODY_MATERIAL_DEFAULT, 3);
-    auto edgeNode = Node::create();
-    edgeNode->setPosition(Vec2(visibleSize.width / 2 + origin.x, visibleSize.height / 2 + origin.y));
-    edgeNode->setPhysicsBody(edgeBody);
-
-    this->addChild(edgeNode);
 
     auto forwardButton = ui::Button::create("res/PNG/HUD/hudJewel_green_empty.png", "res/PNG/HUD/hudJewel_green.png");
     forwardButton->setPosition(Vec2(150, 50));

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.2" orientation="orthogonal" renderorder="right-down" width="15" height="15" tilewidth="128" tileheight="128" infinite="0" nextlayerid="9" nextobjectid="4">
+<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="15" height="15" tilewidth="128" tileheight="128" infinite="0" nextlayerid="9" nextobjectid="11">
  <tileset firstgid="1" source="spritesheet_ground.tsx"/>
  <layer id="5" name="Background" width="15" height="15">
   <data encoding="csv">
@@ -20,10 +20,16 @@
 19,19,19,19,19,19,19,19,19,19,19,19,19,19,19
 </data>
  </layer>
- <objectgroup id="8" name="GroundCollisions">
-  <object id="1" x="893.939" y="1024.24" width="636.364" height="124.242"/>
+ <objectgroup id="8" name="GroundCollisions" visible="0">
   <object id="2" x="0" y="1408" width="1916" height="512"/>
   <object id="3" x="2569.7" y="1372.73"/>
+  <object id="7" x="895.931" y="1022.55">
+   <polygon points="0,0 637.89,0 633.082,73.7259 570.575,118.603 511.273,131.425 126.616,131.425 67.315,117 22.4383,94.5615 0,51.2876"/>
+  </object>
+  <object id="9" x="0" y="1407.2" width="1918.48" height="512.876"/>
+  <object id="10" x="1535.42" y="1408.81">
+   <polygon points="0,0 129.822,-131.425 258.041,-129.822 378.246,-3.20548"/>
+  </object>
  </objectgroup>
  <layer id="1" name="Platforms" width="15" height="15">
   <data encoding="csv">
