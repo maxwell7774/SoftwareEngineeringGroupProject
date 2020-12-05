@@ -1,6 +1,7 @@
 #include "Level1.h"
 #include <vector>
 #include "Player.h"
+#include "ui/CocosGUI.h"
 
 USING_NS_CC;
 
@@ -36,8 +37,9 @@ bool Level1::init()
     map->setPosition(0,-352);
     this->addChild(map, 0, 99);
 
-    auto player = Player("Bob", "Green");
+    player = Player("Bob", "Green");
     this->addChild(player.sprite);
+  
 
     player.sprite->runAction(RepeatForever::create(player.animateWalk));
 
@@ -47,6 +49,61 @@ bool Level1::init()
     edgeNode->setPhysicsBody(edgeBody);
 
     this->addChild(edgeNode);
+
+    auto forwardButton = ui::Button::create("res/PNG/HUD/hudJewel_green_empty.png", "res/PNG/HUD/hudJewel_green.png");
+    forwardButton->setPosition(Vec2(150, 50));
+    
+    forwardButton->addTouchEventListener([&](Ref* sender, ui::Widget::TouchEventType type) {
+        auto moveBy = MoveBy::create(0.5f, Vec2(50, 0));
+        switch (type)
+        {
+        case ui::Widget::TouchEventType::BEGAN:
+            player.sprite->runAction(moveBy);
+            break;
+        case ui::Widget::TouchEventType::ENDED:
+           
+            break;
+        default:
+            break;
+        }
+        });
+    this->addChild(forwardButton);
+
+    auto backwardButton = ui::Button::create("res/PNG/HUD/hudJewel_green_empty.png", "res/PNG/HUD/hudJewel_green.png");
+    backwardButton->setPosition(Vec2(50, 50));
+    backwardButton->addTouchEventListener([&](Ref* sender, ui::Widget::TouchEventType type) {
+        auto moveBy = MoveBy::create(0.5f, Vec2(-50, 0));
+        switch (type)
+        {
+        case ui::Widget::TouchEventType::BEGAN:
+            player.sprite->runAction(moveBy);
+            break;
+        case ui::Widget::TouchEventType::ENDED:
+
+            break;
+        default:
+            break;
+        }
+        });
+    this->addChild(backwardButton);
+
+    auto jumpButton = ui::Button::create("res/PNG/HUD/hudJewel_green_empty.png", "res/PNG/HUD/hudJewel_green.png");
+    jumpButton->setPosition(Vec2(100, 150));
+    jumpButton->addTouchEventListener([&](Ref* sender, ui::Widget::TouchEventType type) {
+        auto moveBy = MoveBy::create(0.5f, Vec2(0, 50));
+        switch (type)
+        {
+        case ui::Widget::TouchEventType::BEGAN:
+            player.sprite->runAction(moveBy);
+            break;
+        case ui::Widget::TouchEventType::ENDED:
+
+            break;
+        default:
+            break;
+        }
+        });
+    this->addChild(jumpButton);
 
     return true;
 }
