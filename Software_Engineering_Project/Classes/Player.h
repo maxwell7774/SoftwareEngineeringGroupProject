@@ -12,26 +12,29 @@ class Player {
 
 private:
 	int lives, x, y;
-	
+	std::string name;
 
 public:
 	Sprite* sprite;
 	PhysicsBody* playerBody;
-	Vector<SpriteFrame*> walkRight;
-	Vector<SpriteFrame*> walkLeft;
+
+	Vector<SpriteFrame*> walk;
 	Vector<SpriteFrame*> jump;
 	Vector<SpriteFrame*> duck;
-	Animate* animateWalkRight;
+	
+	Animate* animateWalk;
+	Animate* animateJump;
+	Animate* animateDuck;
 
 	Player();
-	Player(std::string, std::string);
+	Player(std::string name, std::string color);
 
 	int getLives();
 	int getX();
 	int getY();
 	void subtractLife();
-	void setX();
-	void setY();
+	bool isAlive();
+
 };
 
 #endif

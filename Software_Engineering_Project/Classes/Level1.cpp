@@ -36,11 +36,10 @@ bool Level1::init()
     map->setPosition(0,-352);
     this->addChild(map, 0, 99);
 
-    auto player = Player();
-    player.sprite->setPosition(Director::getInstance()->getVisibleSize().width / 2, Director::getInstance()->getVisibleSize().height / 2);
+    auto player = Player("Bob", "Green");
     this->addChild(player.sprite);
 
-    player.sprite->runAction(RepeatForever::create(player.animateWalkRight));
+    player.sprite->runAction(RepeatForever::create(player.animateWalk));
 
     auto edgeBody = PhysicsBody::createEdgeBox(visibleSize, PHYSICSBODY_MATERIAL_DEFAULT, 3);
     auto edgeNode = Node::create();
