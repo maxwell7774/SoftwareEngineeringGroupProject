@@ -14,8 +14,8 @@ public:
     CREATE_FUNC(Level1);
     Player player;
 private:
-    cocos2d::PhysicsWorld* sceneWorld;
-    void SetPhysicsWorld(cocos2d::PhysicsWorld* world) { sceneWorld = world; };
+    //cocos2d::PhysicsWorld* sceneWorld;
+    //void SetPhysicsWorld(cocos2d::PhysicsWorld* world) { sceneWorld = world; };
    
 };
 

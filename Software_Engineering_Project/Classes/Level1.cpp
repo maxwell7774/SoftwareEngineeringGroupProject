@@ -7,12 +7,8 @@ USING_NS_CC;
 
 Scene* Level1::createScene()
 {
-    auto scene = Level1::createWithPhysics();
+    auto scene = Level1::create();
     scene->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
-    auto layer = Level1::create();
-    layer->SetPhysicsWorld(scene->getPhysicsWorld());
-    scene->addChild(layer);
-    layer->getDefaultCamera()->setScale(2, 2);
     scene->getDefaultCamera()->setScale(2, 2);
     return scene;
 }
@@ -27,7 +23,7 @@ static void problemLoading(const char* filename)
 // on "init" you need to initialize your instance
 bool Level1::init()
 {   
-    if (!Scene::init())
+    if (!Scene::initWithPhysics())
     {
         return false;
     }
