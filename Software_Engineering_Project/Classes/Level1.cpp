@@ -12,6 +12,8 @@ Scene* Level1::createScene()
     auto layer = Level1::create();
     layer->SetPhysicsWorld(scene->getPhysicsWorld());
     scene->addChild(layer);
+    layer->getDefaultCamera()->setScale(2, 2);
+    scene->getDefaultCamera()->setScale(2, 2);
     return scene;
 }
 
@@ -39,7 +41,9 @@ bool Level1::init()
 
     player = Player("Bob", "Green");
     this->addChild(player.sprite);
-  
+    auto camera = this->getDefaultCamera();
+    camera->setScale(2, 2);
+    //this->getDefaultCamera()->setScale(0.5f);
 
     player.sprite->runAction(RepeatForever::create(player.animateWalk));
 
@@ -59,6 +63,7 @@ bool Level1::init()
         {
         case ui::Widget::TouchEventType::BEGAN:
             player.sprite->runAction(moveBy);
+            this->getDefaultCamera()->setPosition(player.sprite->getPosition());
             break;
         case ui::Widget::TouchEventType::ENDED:
            
