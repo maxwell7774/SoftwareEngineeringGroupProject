@@ -2,15 +2,13 @@
   "ExpandedNodes": [
     "",
     "\\Software_Engineering_Project",
-    "\\Software_Engineering_Project\\Resources",
-    "\\Software_Engineering_Project\\Resources\\res",
+    "\\Software_Engineering_Project\\Classes",
     "\\Software_Engineering_Project\\Resources\\res\\MapTMX",
-    "\\Software_Engineering_Project\\Resources\\res\\PNG",
     "\\Software_Engineering_Project\\Resources\\res\\PNG\\Players",
     "\\Software_Engineering_Project\\Resources\\res\\PNG\\Players\\Variable sizes",
     "\\Software_Engineering_Project\\Resources\\res\\PNG\\Players\\Variable sizes\\Yellow",
     "\\Software_Engineering_Project\\Resources\\res\\Spritesheets"
   ],
-  "SelectedNode": "\\Software_Engineering_Project\\Resources\\res\\Spritesheets",
+  "SelectedNode": "\\Software_Engineering_Project\\Classes\\Player.cpp",
   "PreviewInSolutionExplorer": false
 }

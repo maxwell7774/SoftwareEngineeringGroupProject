@@ -2,6 +2,7 @@
 #define LEVEL1_H
 #include "cocos2d.h"
 #include "ui/CocosGUI.h"
+#include "Player.h"
 
 class Level1 : public cocos2d::Scene
 {
@@ -11,11 +12,11 @@ public:
     virtual bool init();
 
     CREATE_FUNC(Level1);
-
+    Player player;
 private:
-    cocos2d::PhysicsWorld* sceneWorld;
-    void SetPhysicsWorld(cocos2d::PhysicsWorld* world) { sceneWorld = world; };
-
+    //cocos2d::PhysicsWorld* sceneWorld;
+    //void SetPhysicsWorld(cocos2d::PhysicsWorld* world) { sceneWorld = world; };
+   
 };
 
 #endif
