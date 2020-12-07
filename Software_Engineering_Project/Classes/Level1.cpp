@@ -43,7 +43,7 @@ bool Level1::init()
     this->addChild(background);
 
     player = Player("Bob", "Green");
-    player.sprite->getPhysicsBody()->setGravityEnable(true);
+    player.sprite->getPhysicsBody()->setGravityEnable(false);
     this->addChild(player.sprite);
     //this->getDefaultCamera()->setScale(0.5f);
 
