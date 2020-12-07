@@ -10,6 +10,8 @@ Scene* Level1::createScene()
     auto scene = Level1::create();
     scene->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
     scene->getDefaultCamera()->setScale(2, 2);
+    
+
     return scene;
 }
 
@@ -41,22 +43,32 @@ bool Level1::init()
     this->addChild(background);
 
     player = Player("Bob", "Green");
-    player.sprite->getPhysicsBody()->setGravityEnable(false);
+    player.sprite->getPhysicsBody()->setGravityEnable(true);
     this->addChild(player.sprite);
     //this->getDefaultCamera()->setScale(0.5f);
 
     player.sprite->runAction(RepeatForever::create(player.animateWalk));
 
-    auto forwardButton = ui::Button::create("res/PNG/HUD/hudJewel_green_empty.png", "res/PNG/HUD/hudJewel_green.png");
-    forwardButton->setPosition(Vec2(150, 50));
-    
+
+    forwardButton = ui::Button::create("res/PNG/HUD/hudJewel_green_empty.png", "res/PNG/HUD/hudJewel_green.png");
+    backwardButton = ui::Button::create("res/PNG/HUD/hudJewel_green_empty.png", "res/PNG/HUD/hudJewel_green.png");
+    jumpButton = ui::Button::create("res/PNG/HUD/hudJewel_green_empty.png", "res/PNG/HUD/hudJewel_green.png");
+
+    forwardButton->setPosition(Vec2(player.sprite->getPositionX() + 400, player.sprite->getPositionY() - 200));
+    backwardButton->setPosition(Vec2(player.sprite->getPositionX() - 400, player.sprite->getPositionY() - 200));
+    jumpButton->setPosition(Vec2(player.sprite->getPositionX(), player.sprite->getPositionY() - 200));
+
     forwardButton->addTouchEventListener([&](Ref* sender, ui::Widget::TouchEventType type) {
-        auto moveBy = MoveBy::create(0.5f, Vec2(50, 0));
+        auto moveBy = MoveBy::create(0.5f, Vec2(40, 0));
         switch (type)
         {
         case ui::Widget::TouchEventType::BEGAN:
             player.sprite->runAction(moveBy);
             this->getDefaultCamera()->setPosition(player.sprite->getPosition());
+            forwardButton->setPosition(Vec2(player.sprite->getPositionX() + 400, player.sprite->getPositionY() - 200));
+            backwardButton->setPosition(Vec2(player.sprite->getPositionX() - 400, player.sprite->getPositionY() - 200));
+            jumpButton->setPosition(Vec2(player.sprite->getPositionX(), player.sprite->getPositionY() - 200));
+
             break;
         case ui::Widget::TouchEventType::ENDED:
            
@@ -65,16 +77,17 @@ bool Level1::init()
             break;
         }
         });
-    this->addChild(forwardButton);
-
-    auto backwardButton = ui::Button::create("res/PNG/HUD/hudJewel_green_empty.png", "res/PNG/HUD/hudJewel_green.png");
-    backwardButton->setPosition(Vec2(50, 50));
+    
     backwardButton->addTouchEventListener([&](Ref* sender, ui::Widget::TouchEventType type) {
-        auto moveBy = MoveBy::create(0.5f, Vec2(-50, 0));
+        auto moveBy = MoveBy::create(0.5f, Vec2(-40, 0));
         switch (type)
         {
         case ui::Widget::TouchEventType::BEGAN:
             player.sprite->runAction(moveBy);
+            this->getDefaultCamera()->setPosition(player.sprite->getPosition());
+            forwardButton->setPosition(Vec2(player.sprite->getPositionX() + 400, player.sprite->getPositionY() - 200));
+            backwardButton->setPosition(Vec2(player.sprite->getPositionX() - 400, player.sprite->getPositionY() - 200));
+            jumpButton->setPosition(Vec2(player.sprite->getPositionX(), player.sprite->getPositionY() - 200));
             break;
         case ui::Widget::TouchEventType::ENDED:
 
@@ -83,16 +96,18 @@ bool Level1::init()
             break;
         }
         });
-    this->addChild(backwardButton);
 
-    auto jumpButton = ui::Button::create("res/PNG/HUD/hudJewel_green_empty.png", "res/PNG/HUD/hudJewel_green.png");
-    jumpButton->setPosition(Vec2(100, 150));
     jumpButton->addTouchEventListener([&](Ref* sender, ui::Widget::TouchEventType type) {
         auto moveBy = MoveBy::create(0.5f, Vec2(0, 50));
         switch (type)
         {
         case ui::Widget::TouchEventType::BEGAN:
             player.sprite->runAction(moveBy);
+            this->getDefaultCamera()->setPosition(player.sprite->getPosition());
+            forwardButton->setPosition(Vec2(player.sprite->getPositionX() + 400, player.sprite->getPositionY() - 200));
+            backwardButton->setPosition(Vec2(player.sprite->getPositionX() - 400, player.sprite->getPositionY() - 200));
+            jumpButton->setPosition(Vec2(player.sprite->getPositionX(), player.sprite->getPositionY() - 200));
+            
             break;
         case ui::Widget::TouchEventType::ENDED:
 
@@ -101,7 +116,8 @@ bool Level1::init()
             break;
         }
         });
+    this->addChild(forwardButton);
+    this->addChild(backwardButton);
     this->addChild(jumpButton);
-
     return true;
 }
