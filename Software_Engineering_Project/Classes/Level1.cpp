@@ -37,20 +37,20 @@ bool Level1::init()
     auto collisions = map->getObjectGroup("GroundCollisions");
     auto arr = collisions->getObjects();
     
-    Node* physicsBodys[arr.size()];
+    //Node* physicsBodys[arr.size()];
     
     for(int i = 0; i < arr.size(); i++){
         int x = arr[i].asValueMap()["x"].asInt();
         int y = arr[i].asValueMap()["y"].asInt();
         int width = arr[i].asValueMap()["width"].asInt();
         int height = arr[i].asValueMap()["height"].asInt();
-        physicsBodys[i] = Node::create();
-        physicsBodys[i]->setAnchorPoint(Vec2(0,0));
-        physicsBodys[i]->setPosition(Vec2(x,y));
-        physicsBodys[i]->addComponent(PhysicsBody::createEdgeBox(Size(width,height)));
-        physicsBodys[i]->getPhysicsBody()->setDynamic(false);
-        physicsBodys[i]->getPhysicsBody()->setPositionOffset(Vec2(width/2,height/2));
-        this->addChild(physicsBodys[i]);
+        auto node = Node::create();
+        node->setAnchorPoint(Vec2(0,0));
+        node->setPosition(Vec2(x,y));
+        node->addComponent(PhysicsBody::createEdgeBox(Size(width,height)));
+        node->getPhysicsBody()->setDynamic(false);
+        node->getPhysicsBody()->setPositionOffset(Vec2(width/2,height/2));
+        this->addChild(node);
         
     }
     
