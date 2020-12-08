@@ -23,8 +23,8 @@ Player::Player() {
 }
 
 Player::Player(std::string name, std::string color) {
-	x = Director::getInstance()->getVisibleSize().width / 2;
-	y = Director::getInstance()->getVisibleSize().height / 2;
+    x = 300;
+    y = 600;
 	lives = 3;
 	this->name = name;
 
