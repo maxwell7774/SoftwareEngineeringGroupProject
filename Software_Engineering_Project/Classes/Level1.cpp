@@ -1,7 +1,9 @@
 #include "Level1.h"
 #include <vector>
 #include "Player.h"
+#include "Enemy.h"
 #include "ui/CocosGUI.h"
+#include "GameHud.h"
 
 USING_NS_CC;
 
@@ -10,8 +12,8 @@ Scene* Level1::createScene()
     auto scene = Level1::create();
     scene->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
     scene->getDefaultCamera()->setScale(2, 2);
-    
-
+    GameHud* hud = GameHud::create();
+    scene->addChild(hud,123, 5);
     return scene;
 }
 
@@ -61,76 +63,14 @@ bool Level1::init()
     map->addComponent(edgeBody);
     this->addChild(map);
 
+    e1 = Enemy();
+    e1.playerBody->setGravityEnable(false);
+    this->addChild(e1.sprite);
+    
+
     player = Player("Bob", "Green");
     this->addChild(player.sprite);
     player.sprite->runAction(RepeatForever::create(player.animateWalk));
-
-
-    forwardButton = ui::Button::create("res/PNG/HUD/hudJewel_green_empty.png", "res/PNG/HUD/hudJewel_green.png");
-    backwardButton = ui::Button::create("res/PNG/HUD/hudJewel_green_empty.png", "res/PNG/HUD/hudJewel_green.png");
-    jumpButton = ui::Button::create("res/PNG/HUD/hudJewel_green_empty.png", "res/PNG/HUD/hudJewel_green.png");
-
-    forwardButton->setPosition(Vec2(player.sprite->getPositionX() + 400, player.sprite->getPositionY() - 200));
-    backwardButton->setPosition(Vec2(player.sprite->getPositionX() - 400, player.sprite->getPositionY() - 200));
-    jumpButton->setPosition(Vec2(player.sprite->getPositionX(), player.sprite->getPositionY() - 200));
-
-    forwardButton->addTouchEventListener([&](Ref* sender, ui::Widget::TouchEventType type) {
-        switch (type)
-        {
-        case ui::Widget::TouchEventType::BEGAN:
-                player.sprite->getPhysicsBody()->setVelocity(Vec2(300, 0));
-            this->getDefaultCamera()->setPosition(player.sprite->getPosition());
-            forwardButton->setPosition(Vec2(player.sprite->getPositionX() + 400, player.sprite->getPositionY() - 200));
-            backwardButton->setPosition(Vec2(player.sprite->getPositionX() - 400, player.sprite->getPositionY() - 200));
-            jumpButton->setPosition(Vec2(player.sprite->getPositionX(), player.sprite->getPositionY() - 200));
-
-            break;
-        case ui::Widget::TouchEventType::ENDED:
-                player.sprite->getPhysicsBody()->setVelocity(Vec2(0, 0));
-            break;
-        default:
-            break;
-        }
-        });
     
-    backwardButton->addTouchEventListener([&](Ref* sender, ui::Widget::TouchEventType type) {
-        switch (type)
-        {
-        case ui::Widget::TouchEventType::BEGAN:
-                player.sprite->getPhysicsBody()->setVelocity(Vec2(-300, 0));
-            this->getDefaultCamera()->setPosition(player.sprite->getPosition());
-            forwardButton->setPosition(Vec2(player.sprite->getPositionX() + 400, player.sprite->getPositionY() - 200));
-            backwardButton->setPosition(Vec2(player.sprite->getPositionX() - 400, player.sprite->getPositionY() - 200));
-            jumpButton->setPosition(Vec2(player.sprite->getPositionX(), player.sprite->getPositionY() - 200));
-            break;
-        case ui::Widget::TouchEventType::ENDED:
-                player.sprite->getPhysicsBody()->setVelocity(Vec2(0, 0));
-            break;
-        default:
-            break;
-        }
-        });
-
-    jumpButton->addTouchEventListener([&](Ref* sender, ui::Widget::TouchEventType type) {
-        switch (type)
-        {
-        case ui::Widget::TouchEventType::BEGAN:
-                player.sprite->getPhysicsBody()->setVelocity(Vec2(0, 300));
-            this->getDefaultCamera()->setPosition(player.sprite->getPosition());
-            forwardButton->setPosition(Vec2(player.sprite->getPositionX() + 400, player.sprite->getPositionY() - 200));
-            backwardButton->setPosition(Vec2(player.sprite->getPositionX() - 400, player.sprite->getPositionY() - 200));
-            jumpButton->setPosition(Vec2(player.sprite->getPositionX(), player.sprite->getPositionY() - 200));
-            
-            break;
-        case ui::Widget::TouchEventType::ENDED:
-                player.sprite->getPhysicsBody()->setVelocity(Vec2(0, 0));
-            break;
-        default:
-            break;
-        }
-        });
-    this->addChild(forwardButton);
-    this->addChild(backwardButton);
-    this->addChild(jumpButton);
     return true;
 }
