@@ -3,7 +3,6 @@
 #include "Player.h"
 #include "Enemy.h"
 #include "ui/CocosGUI.h"
-#include "GameHud.h"
 
 USING_NS_CC;
 
@@ -12,8 +11,6 @@ Scene* Level1::createScene()
     auto scene = Level1::create();
     scene->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
     scene->getDefaultCamera()->setScale(2, 2);
-    GameHud* hud = GameHud::create();
-    scene->addChild(hud,123, 5);
     return scene;
 }
 
@@ -66,11 +63,104 @@ bool Level1::init()
     e1 = Enemy();
     e1.playerBody->setGravityEnable(false);
     this->addChild(e1.sprite);
+	e1.sprite->runAction(RepeatForever::create(e1.animateMove));
     
 
     player = Player("Bob", "Green");
     this->addChild(player.sprite);
+	
     player.sprite->runAction(RepeatForever::create(player.animateWalk));
+
+	this->addChild(player.h1);
+	this->addChild(player.h2);
+	this->addChild(player.h3);
     
+
+
+	forwardbtn = ui::Button::create("res/PNG/HUD/hudJewel_green_empty.png", "res/PNG/HUD/hudJewel_green.png");
+	backbtn = ui::Button::create("res/PNG/HUD/hudJewel_green_empty.png", "res/PNG/HUD/hudJewel_green.png");
+	jumpbtn = ui::Button::create("res/PNG/HUD/hudJewel_green_empty.png", "res/PNG/HUD/hudJewel_green.png");
+
+	forwardbtn->setPosition(Vec2(player.sprite->getPositionX() + 400, player.sprite->getPositionY() - 200));
+	backbtn->setPosition(Vec2(player.sprite->getPositionX() - 400, player.sprite->getPositionY() - 200));
+	jumpbtn->setPosition(Vec2(player.sprite->getPositionX(), player.sprite->getPositionY() - 200));
+
+	forwardbtn->setTag(999);
+	backbtn->setTag(111);
+	jumpbtn->setTag(555);
+
+
+
+	forwardbtn->addTouchEventListener([&](Ref* sender, ui::Widget::TouchEventType type) {
+		switch (type)
+		{
+		case ui::Widget::TouchEventType::BEGAN:
+
+				player.sprite->getPhysicsBody()->setVelocity(Vec2(300, 0));
+				this->getDefaultCamera()->setPosition(player.sprite->getPosition());
+				forwardbtn->setPosition(Vec2(player.sprite->getPositionX() + 400, player.sprite->getPositionY() - 200));
+				backbtn->setPosition(Vec2(player.sprite->getPositionX() - 400, player.sprite->getPositionY() - 200));
+				jumpbtn->setPosition(Vec2(player.sprite->getPositionX(), player.sprite->getPositionY() - 200));
+
+				break;
+		case ui::Widget::TouchEventType::ENDED:
+			player.sprite->getPhysicsBody()->setVelocity(Vec2(0, 0));
+			break;
+		default:
+			break;
+		}
+		});
+	backbtn->addTouchEventListener([&](Ref* sender, ui::Widget::TouchEventType type) {
+		switch (type)
+		{
+		case ui::Widget::TouchEventType::BEGAN:
+			player.sprite->getPhysicsBody()->setVelocity(Vec2(-300, 0));
+			this->getDefaultCamera()->setPosition(player.sprite->getPosition());
+			forwardbtn->setPosition(Vec2(player.sprite->getPositionX() + 400, player.sprite->getPositionY() - 200));
+			backbtn->setPosition(Vec2(player.sprite->getPositionX() - 400, player.sprite->getPositionY() - 200));
+			jumpbtn->setPosition(Vec2(player.sprite->getPositionX(), player.sprite->getPositionY() - 200));
+			break;
+		case ui::Widget::TouchEventType::ENDED:
+			player.sprite->getPhysicsBody()->setVelocity(Vec2(0, 0));
+			break;
+		default:
+			break;
+		}
+		});
+
+	jumpbtn->addTouchEventListener([&](Ref* sender, ui::Widget::TouchEventType type) {
+		switch (type)
+		{
+		case ui::Widget::TouchEventType::BEGAN:
+			player.sprite->getPhysicsBody()->setVelocity(Vec2(0, 300));
+			
+			forwardbtn->setPosition(Vec2(player.sprite->getPositionX() + 400, player.sprite->getPositionY() - 200));
+			backbtn->setPosition(Vec2(player.sprite->getPositionX() - 400, player.sprite->getPositionY() - 200));
+			jumpbtn->setPosition(Vec2(player.sprite->getPositionX(), player.sprite->getPositionY() - 200));
+
+			break;
+		case ui::Widget::TouchEventType::ENDED:
+			player.sprite->getPhysicsBody()->setVelocity(Vec2(0, 0));
+			break;
+		default:
+			break;
+		}
+		});
+
+	addChild(forwardbtn);
+	addChild(backbtn);
+	addChild(jumpbtn);
+	this->scheduleUpdate();
     return true;
+}
+
+void Level1::update(float dt) {
+	this->getDefaultCamera()->setPosition(player.sprite->getPosition());
+	this->getDefaultCamera()->update(dt);
+	forwardbtn->setPosition(Vec2(player.sprite->getPositionX() + 400, player.sprite->getPositionY() - 200));
+	backbtn->setPosition(Vec2(player.sprite->getPositionX() - 400, player.sprite->getPositionY() - 200));
+	jumpbtn->setPosition(Vec2(player.sprite->getPositionX(), player.sprite->getPositionY() - 200));
+	player.h1->setPosition(Vec2(player.sprite->getPositionX() + 400, player.sprite->getPositionY() + 250));
+	player.h2->setPosition(Vec2(player.sprite->getPositionX() + 300, player.sprite->getPositionY() + 250));
+	player.h3->setPosition(Vec2(player.sprite->getPositionX() + 200, player.sprite->getPositionY() + 250));
 }

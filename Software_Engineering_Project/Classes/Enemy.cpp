@@ -10,7 +10,7 @@ Enemy::Enemy() {
 	sprite->setPosition(Vec2(500,200));
 
 	move.pushBack(SpriteFrame::create("res/PNG/Enemies/fly.png", Rect(0, 0, sprite->getContentSize().width, sprite->getContentSize().height)));
-	move.pushBack(SpriteFrame::create("res/PNG/Enemies/fly_move.png", Rect(0, 0, sprite->getContentSize().width, sprite->getContentSize().height)));
+	move.pushBack(SpriteFrame::create("res/PNG/Enemies/fly_dead.png", Rect(0, 0, sprite->getContentSize().width, sprite->getContentSize().height)));
 	animateMove = Animate::create(Animation::createWithSpriteFrames(move, 0.15f));
 }
 int Enemy::getX() { return x; }

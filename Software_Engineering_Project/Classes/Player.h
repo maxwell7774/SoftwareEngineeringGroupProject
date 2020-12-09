@@ -35,6 +35,11 @@ public:
 	void subtractLife();
 	bool isAlive();
 
+	Sprite* h1;
+	Sprite* h2;
+	Sprite* h3;
+
+
 };
 
 #endif

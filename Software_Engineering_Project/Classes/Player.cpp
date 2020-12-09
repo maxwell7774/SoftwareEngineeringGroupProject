@@ -20,6 +20,14 @@ Player::Player() {
 
 	duck.pushBack(SpriteFrame::create("res/PNG/Players/128x256/Yellow/alienYellow_duck.png", Rect(0, 0, sprite->getContentSize().width, sprite->getContentSize().height)));
 	animateDuck = Animate::create(Animation::createWithSpriteFrames(duck, 0.15f));
+
+	h1 = Sprite::create("res/PNG/HUD/hudHeart_full.png");
+	h2 = Sprite::create("res/PNG/HUD/hudHeart_full.png");
+	h3 = Sprite::create("res/PNG/HUD/hudHeart_full.png");
+
+	h1->setPosition(Vec2(sprite->getPositionX() + 400, sprite->getPositionY() - 200));
+	h2->setPosition(Vec2(sprite->getPositionX() + 300, sprite->getPositionY() - 200));
+	h3->setPosition(Vec2(sprite->getPositionX() + 200, sprite->getPositionY() - 200));
 }
 
 Player::Player(std::string name, std::string color) {
@@ -43,6 +51,14 @@ Player::Player(std::string name, std::string color) {
 
 	duck.pushBack(SpriteFrame::create("res/PNG/Players/128x256/" + color + "/alien" + color + "_duck.png", Rect(0, 0, sprite->getContentSize().width, sprite->getContentSize().height)));
 	animateDuck = Animate::create(Animation::createWithSpriteFrames(duck, 0.15f));
+
+	h1 = Sprite::create("res/PNG/HUD/hudHeart_full.png");
+	h2 = Sprite::create("res/PNG/HUD/hudHeart_full.png");
+	h3 = Sprite::create("res/PNG/HUD/hudHeart_full.png");
+
+	h1->setPosition(Vec2(sprite->getPositionX() + 400, sprite->getPositionY() + 250));
+	h2->setPosition(Vec2(sprite->getPositionX() + 300, sprite->getPositionY() + 250));
+	h3->setPosition(Vec2(sprite->getPositionX() + 200, sprite->getPositionY() + 250));
 }
 
 int Player::getLives() { return lives; }
@@ -51,6 +67,13 @@ int Player::getY() { return y; }
 void Player::subtractLife() {
 	if (isAlive()) {
 		lives--;
+		if (getLives() == 2) {
+			h3->setTexture("res/PNG/HUD/hudHeart_empty.png");
+		}
+		if (getLives() == 1) {
+			h2->setTexture("res/PNG/HUD/hudHeart_empty.png");
+		}
+
 	}
 }
 
