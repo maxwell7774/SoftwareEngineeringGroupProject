@@ -104,26 +104,30 @@ void Player::setActions(std::string dir){
     stopActions();
     
     if(dir == "left"){
-        aPressed = true;
-        dPressed = false;
         sprite->setFlippedX(true);
         sprite->runAction(RepeatForever::create(animateWalk));
-        sprite->getPhysicsBody()->setVelocity(Vec2(-450, sprite->getPhysicsBody()->getVelocity().y));
+        if(!aPressed){
+            aPressed = true;
+            dPressed = false;
+            sprite->getPhysicsBody()->setVelocity(Vec2(-450, sprite->getPhysicsBody()->getVelocity().y));
+        }
     }
     else if(dir == "right"){
-        dPressed = true;
-        aPressed = false;
         sprite->setFlippedX(false);
         sprite->runAction(RepeatForever::create(animateWalk));
-        sprite->getPhysicsBody()->setVelocity(Vec2(450, sprite->getPhysicsBody()->getVelocity().y));
+        if(!dPressed){
+            dPressed = true;
+            aPressed = false;
+            sprite->getPhysicsBody()->setVelocity(Vec2(450, sprite->getPhysicsBody()->getVelocity().y));
+        }
     }
     else if(dir == "jump"){
         spacePressed = true;
         sprite->runAction(RepeatForever::create(animateJump));
-        if(aPressed && !dPressed){
+        if(aPressed){
             sprite->getPhysicsBody()->setVelocity(Vec2(-450, 600));
         }
-        else if(dPressed && !aPressed){
+        else if(dPressed){
             sprite->getPhysicsBody()->setVelocity(Vec2(450, 600));
         }
         else{
@@ -142,8 +146,13 @@ void Player::switchKey(char key){
         aPressed = false;
     else if(key == 'd')
         dPressed = false;
-    else if(key == 's')
+    else if(key == 's'){
         spacePressed = false;
+        if(aPressed)
+            setActions("left");
+        else if(dPressed)
+            setActions("right");
+    }
     if(!aPressed && !dPressed && !spacePressed){
         sprite->getPhysicsBody()->setVelocity(Vec2(0,0));
         stopActions();
