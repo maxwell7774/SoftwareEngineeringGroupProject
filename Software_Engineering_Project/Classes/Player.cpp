@@ -25,9 +25,9 @@ Player::Player() {
 	h2 = Sprite::create("res/PNG/HUD/hudHeart_full.png");
 	h3 = Sprite::create("res/PNG/HUD/hudHeart_full.png");
 
-	h1->setPosition(Vec2(sprite->getPositionX() + 400, sprite->getPositionY() - 200));
-	h2->setPosition(Vec2(sprite->getPositionX() + 300, sprite->getPositionY() - 200));
-	h3->setPosition(Vec2(sprite->getPositionX() + 200, sprite->getPositionY() - 200));
+	h1->setPosition(Vec2(sprite->getPositionX() - 400, sprite->getPositionY() - 200));
+	h2->setPosition(Vec2(sprite->getPositionX() - 300, sprite->getPositionY() - 200));
+	h3->setPosition(Vec2(sprite->getPositionX() - 200, sprite->getPositionY() - 200));
 }
 
 Player::Player(std::string name, std::string color) {
