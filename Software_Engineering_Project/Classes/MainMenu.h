@@ -11,7 +11,7 @@ public:
     virtual bool init();
     
     // a selector callback
-    void toLevel1(cocos2d::Ref* pSender);
+    void toLevelMenu(cocos2d::Ref* pSender);
     
     // implement the "static create()" method manually
     CREATE_FUNC(MainMenu);
