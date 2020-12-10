@@ -32,11 +32,11 @@ bool Level1::init()
     auto visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
-    auto map = TMXTiledMap::create("res/MapTMX/MapTest1.tmx");
-    auto collisions = map->getObjectGroup("GroundCollisions");
+    auto map = TMXTiledMap::create("res/MapTMX/Level1.tmx");
+    auto collisions = map->getObjectGroup("ground_collisions");
     auto arr = collisions->getObjects();
     
-    auto background = Sprite::create("res/MapTMX/MapTest1.png");
+    auto background = Sprite::create("res/MapTMX/Level1.png");
     auto edgeBody = PhysicsBody::createEdgeBox(background->getContentSize(), PhysicsMaterial(0,0,0), 3);
     background->addComponent(edgeBody);
     
