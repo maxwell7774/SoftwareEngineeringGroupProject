@@ -2,10 +2,13 @@
 #include "GameOver.h"
 
 Player::Player() {
-	x = 0;
-	y = 0;
+	x = 300;
+	y = 600;
 	lives = 3;
 	color = "Yellow";
+    aPressed = false;
+    dPressed = false;
+    spacePressed = false;
 
 	sprite = Sprite::create("res/PNG/Players/128x256/Yellow/alienYellow_stand.png");
 	playerBody = PhysicsBody::createBox(Size(110, 138), PhysicsMaterial(0, 1, 0));
@@ -19,7 +22,9 @@ Player::Player() {
 
 	jump.pushBack(SpriteFrame::create("res/PNG/Players/128x256/Yellow/alienYellow_jump.png", Rect(0, 0, sprite->getContentSize().width, sprite->getContentSize().height)));
 
-	duck.pushBack(SpriteFrame::create("res/PNG/Players/128x256/Yellow/alienYellow_duck.png", Rect(0, 0, sprite->getContentSize().width, sprite->getContentSize().height)));
+	idle.pushBack(SpriteFrame::create("res/PNG/Players/128x256/Yellow/alienYellow_front.png", Rect(0, 0, sprite->getContentSize().width, sprite->getContentSize().height)));
+    idle.pushBack(SpriteFrame::create("res/PNG/Players/128x256/Yellow/alienYellow_stand.png", Rect(0, 0, sprite->getContentSize().width, sprite->getContentSize().height)));
+    switchKey('a');
 
 	h1 = Sprite::create("res/PNG/HUD/hudHeart_full.png");
 	h2 = Sprite::create("res/PNG/HUD/hudHeart_full.png");
@@ -36,9 +41,9 @@ Player::Player(std::string name, std::string color) {
     lives = 3;
     this->name = name;
 	this->color = color;
-    aPressed = true;
-    dPressed = true;
-    spacePressed = true;
+    aPressed = false;
+    dPressed = false;
+    spacePressed = false;
 
     sprite = Sprite::create("res/PNG/Players/128x256/"+color+"/alien"+color+"_stand.png");
     playerBody = PhysicsBody::createBox(Size(80, 138), PhysicsMaterial(0, 0, 0));
@@ -53,8 +58,11 @@ Player::Player(std::string name, std::string color) {
 
     jump.pushBack(SpriteFrame::create("res/PNG/Players/128x256/" + color + "/alien" + color + "_jump.png", Rect(0, 0, sprite->getContentSize().width, sprite->getContentSize().height)));
 
-    duck.pushBack(SpriteFrame::create("res/PNG/Players/128x256/" + color + "/alien" + color + "_duck.png", Rect(0, 0, sprite->getContentSize().width, sprite->getContentSize().height)));
+    idle.pushBack(SpriteFrame::create("res/PNG/Players/128x256/" + color + "/alien" + color + "_front.png", Rect(0, 0, sprite->getContentSize().width, sprite->getContentSize().height)));
 
+    idle.pushBack(SpriteFrame::create("res/PNG/Players/128x256/" + color + "/alien" + color + "_stand.png", Rect(0, 0, sprite->getContentSize().width, sprite->getContentSize().height)));
+    switchKey('a');
+    
     h1 = Sprite::create("res/PNG/HUD/hudHeart_full.png");
     h2 = Sprite::create("res/PNG/HUD/hudHeart_full.png");
     h3 = Sprite::create("res/PNG/HUD/hudHeart_full.png");
@@ -139,5 +147,8 @@ void Player::switchKey(char key){
     if(!aPressed && !dPressed && !spacePressed){
         sprite->getPhysicsBody()->setVelocity(Vec2(0,0));
         stopActions();
+        
+        auto animateIdle = Animate::create(Animation::createWithSpriteFrames(idle, 0.3f));
+        sprite->runAction(RepeatForever::create(animateIdle));
     }
 }
