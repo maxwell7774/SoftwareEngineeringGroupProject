@@ -9,7 +9,7 @@ USING_NS_CC;
 Scene* Level1::createScene()
 {
     auto scene = Level1::create();
-//    scene->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
+    scene->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
     scene->getDefaultCamera()->setScale(2, 2);
     return scene;
 }
@@ -32,27 +32,25 @@ bool Level1::init()
     auto visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
-    auto map = TMXTiledMap::create("res/MapTMX/mapTest2.tmx");
+    auto map = TMXTiledMap::create("res/MapTMX/MapTest1.tmx");
     auto collisions = map->getObjectGroup("GroundCollisions");
     auto arr = collisions->getObjects();
     
     auto background = Sprite::create("res/MapTMX/MapTest1.png");
-    background->setAnchorPoint(Vec2(0,0));
-    auto edgeBody = PhysicsBody::createEdgeBox(map->getContentSize(), PhysicsMaterial(0,0,0), 3);
-    map->setAnchorPoint(Vec2(0,0));
-    map->addComponent(edgeBody);
+    auto edgeBody = PhysicsBody::createEdgeBox(background->getContentSize(), PhysicsMaterial(0,0,0), 3);
+    background->addComponent(edgeBody);
     
     for(int i = 0; i < arr.size(); i++){
         int x = arr[i].asValueMap()["x"].asInt();
         int y = arr[i].asValueMap()["y"].asInt();
         int width = arr[i].asValueMap()["width"].asInt();
         int height = arr[i].asValueMap()["height"].asInt();
-        auto shape = PhysicsShapeBox::create(Size(width, height), PhysicsMaterial(0,0,0), Vec2(x-(map->getContentSize().width/2)+width/2, y-(map->getContentSize().height/2)+height/2));
-        map->getPhysicsBody()->addShape(shape);
+        auto shape = PhysicsShapeBox::create(Size(width, height), PhysicsMaterial(0,0,0), Vec2(x-(background->getContentSize().width/2)+width/2, y-(background->getContentSize().height/2)+height/2));
+        background->getPhysicsBody()->addShape(shape);
     }
     
     this->getPhysicsWorld()->setGravity(Vec2(0,-1000));
-    this->addChild(map);
+    this->addChild(background);
 
     e1 = Enemy();
     e1.playerBody->setGravityEnable(false);
@@ -64,9 +62,6 @@ bool Level1::init()
     player = Player("Bob", "Green");
     this->addChild(player.sprite);
 	
-
-    //player.sprite->runAction(RepeatForever::create(player.animateWalk));
-
 	this->addChild(player.h1);
 	this->addChild(player.h2);
 	this->addChild(player.h3);
