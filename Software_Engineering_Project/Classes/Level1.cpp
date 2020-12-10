@@ -58,6 +58,7 @@ bool Level1::init()
     e1.playerBody->setGravityEnable(false);
     this->addChild(e1.sprite);
 	e1.sprite->runAction(RepeatForever::create(e1.animateMove));
+    e1.sprite->runAction(RepeatForever::create(e1.flyAround));
     
 
     player = Player("Bob", "Green");
@@ -127,4 +128,8 @@ void Level1::onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, Event* event
             player.stopActions();
             break;
     }
+}
+
+void toLevel2(cocos2d::Ref* pSender) {
+
 }

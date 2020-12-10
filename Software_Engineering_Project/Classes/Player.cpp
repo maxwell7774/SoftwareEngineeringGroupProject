@@ -1,4 +1,5 @@
 #include "Player.h"
+#include "GameOver.h"
 
 Player::Player() {
 	x = 0;
@@ -77,7 +78,10 @@ void Player::subtractLife() {
 		if (getLives() == 1) {
 			h2->setTexture("res/PNG/HUD/hudHeart_empty.png");
 		}
-
+        if (getLives() == 0) {
+            auto gameover = GameOver::createScene();
+            Director::getInstance()->replaceScene(TransitionFade::create(0.5f, gameover));
+        }
 	}
 }
 

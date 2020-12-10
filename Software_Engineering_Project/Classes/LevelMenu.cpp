@@ -91,8 +91,8 @@ void LevelMenu::toLevel4(cocos2d::Ref* pSender) {
 
 }
 void LevelMenu::toLevel5(cocos2d::Ref* pSender) {
-    auto level1 = GameOver::createScene();
-    Director::getInstance()->replaceScene(TransitionFade::create(0.5f, level1));
+    auto level5 = GameOver::createScene();
+    Director::getInstance()->replaceScene(TransitionFade::create(0.5f, level5));
 }
 void LevelMenu::toMainMenu(cocos2d::Ref* pSender) {
     auto main = MainMenu::createScene();
