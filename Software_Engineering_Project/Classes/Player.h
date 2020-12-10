@@ -23,7 +23,7 @@ public:
 
 	Vector<SpriteFrame*> walk;
 	Vector<SpriteFrame*> jump;
-	Vector<SpriteFrame*> duck;
+	Vector<SpriteFrame*> idle;
 
 	Player();
 	Player(std::string name, std::string color);
