@@ -111,20 +111,6 @@ void Level1::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, Event* event)
 
 void Level1::onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, Event* event)
 {
-        log("Key with keycode %d released", keyCode);
-    switch(keyCode){
-        case EventKeyboard::KeyCode::KEY_A:
-            player.sprite->getPhysicsBody()->setVelocity(Vec2(0, 0));
-            player.stopActions();
-            std::cout << "A pressed" << std::endl;
-            break;
-        case EventKeyboard::KeyCode::KEY_D:
-            player.sprite->getPhysicsBody()->setVelocity(Vec2(0, 0));
-            player.stopActions();
-            break;
-        case EventKeyboard::KeyCode::KEY_SPACE:
-            player.sprite->getPhysicsBody()->setVelocity(Vec2(0, 0));
-            player.stopActions();
-            break;
-    }
+    log("Key with keycode %d released", keyCode);
+    player.stopActions();
 }
