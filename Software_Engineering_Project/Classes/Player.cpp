@@ -33,32 +33,33 @@ Player::Player() {
 Player::Player(std::string name, std::string color) {
     x = 300;
     y = 600;
-	lives = 3;
-	this->name = name;
+    lives = 3;
+    this->name = name;
 
-	sprite = Sprite::create("res/PNG/Players/128x256/"+color+"/alien"+color+"_stand.png");
-	playerBody = PhysicsBody::createBox(Size(110, 138), PhysicsMaterial(0, 1, 0));
-	playerBody->setPositionOffset(Vec2(0, -60));
-	sprite->setPhysicsBody(playerBody);
-	sprite->setPosition( x, y );
+    sprite = Sprite::create("res/PNG/Players/128x256/"+color+"/alien"+color+"_stand.png");
+    playerBody = PhysicsBody::createBox(Size(80, 138), PhysicsMaterial(0, 0, 0));
+    playerBody->setPositionOffset(Vec2(0, -60));
+    sprite->setPhysicsBody(playerBody);
+    sprite->setPosition( x, y );
+    playerBody->setRotationEnable(false);
 
-	walk.pushBack(SpriteFrame::create("res/PNG/Players/128x256/" + color + "/alien" + color + "_walk1.png", Rect(0, 0, sprite->getContentSize().width, sprite->getContentSize().height)));
-	walk.pushBack(SpriteFrame::create("res/PNG/Players/128x256/" + color + "/alien" + color + "_walk2.png", Rect(0, 0, sprite->getContentSize().width, sprite->getContentSize().height)));
-	animateWalk = Animate::create(Animation::createWithSpriteFrames(walk, 0.15f));
+    walk.pushBack(SpriteFrame::create("res/PNG/Players/128x256/" + color + "/alien" + color + "_walk1.png", Rect(0, 0, sprite->getContentSize().width, sprite->getContentSize().height)));
+    walk.pushBack(SpriteFrame::create("res/PNG/Players/128x256/" + color + "/alien" + color + "_walk2.png", Rect(0, 0, sprite->getContentSize().width, sprite->getContentSize().height)));
+    animateWalk = Animate::create(Animation::createWithSpriteFrames(walk, 0.15f));
 
-	jump.pushBack(SpriteFrame::create("res/PNG/Players/128x256/" + color + "/alien" + color + "_jump.png", Rect(0, 0, sprite->getContentSize().width, sprite->getContentSize().height)));
-	animateJump = Animate::create(Animation::createWithSpriteFrames(jump, 0.15f));
+    jump.pushBack(SpriteFrame::create("res/PNG/Players/128x256/" + color + "/alien" + color + "_jump.png", Rect(0, 0, sprite->getContentSize().width, sprite->getContentSize().height)));
+    animateJump = Animate::create(Animation::createWithSpriteFrames(jump, 0.15f));
 
-	duck.pushBack(SpriteFrame::create("res/PNG/Players/128x256/" + color + "/alien" + color + "_duck.png", Rect(0, 0, sprite->getContentSize().width, sprite->getContentSize().height)));
-	animateDuck = Animate::create(Animation::createWithSpriteFrames(duck, 0.15f));
+    duck.pushBack(SpriteFrame::create("res/PNG/Players/128x256/" + color + "/alien" + color + "_duck.png", Rect(0, 0, sprite->getContentSize().width, sprite->getContentSize().height)));
+    animateDuck = Animate::create(Animation::createWithSpriteFrames(duck, 0.15f));
 
-	h1 = Sprite::create("res/PNG/HUD/hudHeart_full.png");
-	h2 = Sprite::create("res/PNG/HUD/hudHeart_full.png");
-	h3 = Sprite::create("res/PNG/HUD/hudHeart_full.png");
+    h1 = Sprite::create("res/PNG/HUD/hudHeart_full.png");
+    h2 = Sprite::create("res/PNG/HUD/hudHeart_full.png");
+    h3 = Sprite::create("res/PNG/HUD/hudHeart_full.png");
 
-	h1->setPosition(Vec2(sprite->getPositionX() + 400, sprite->getPositionY() + 250));
-	h2->setPosition(Vec2(sprite->getPositionX() + 300, sprite->getPositionY() + 250));
-	h3->setPosition(Vec2(sprite->getPositionX() + 200, sprite->getPositionY() + 250));
+    h1->setPosition(Vec2(sprite->getPositionX() + 400, sprite->getPositionY() + 250));
+    h2->setPosition(Vec2(sprite->getPositionX() + 300, sprite->getPositionY() + 250));
+    h3->setPosition(Vec2(sprite->getPositionX() + 200, sprite->getPositionY() + 250));
 }
 
 int Player::getLives() { return lives; }

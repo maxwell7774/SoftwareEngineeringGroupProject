@@ -21,7 +21,8 @@ public:
     cocos2d::ui::Button* forwardbtn;
     cocos2d::ui::Button* backbtn;
     cocos2d::ui::Button* jumpbtn;
-    
+    void onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, Event* event);
+    void onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, Event* event);
     
 private:
     //cocos2d::PhysicsWorld* sceneWorld;

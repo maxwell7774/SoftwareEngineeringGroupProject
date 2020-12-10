@@ -36,28 +36,22 @@ bool Level1::init()
     auto collisions = map->getObjectGroup("GroundCollisions");
     auto arr = collisions->getObjects();
     
-    //Node* physicsBodys[arr.size()];
+    auto background = Sprite::create("res/MapTMX/MapTest1.png");
+    background->setAnchorPoint(Vec2(0,0));
+    auto edgeBody = PhysicsBody::createEdgeBox(map->getContentSize(), PHYSICSBODY_MATERIAL_DEFAULT, 3);
+    map->setAnchorPoint(Vec2(0,0));
+    map->addComponent(edgeBody);
     
     for(int i = 0; i < arr.size(); i++){
         int x = arr[i].asValueMap()["x"].asInt();
         int y = arr[i].asValueMap()["y"].asInt();
         int width = arr[i].asValueMap()["width"].asInt();
         int height = arr[i].asValueMap()["height"].asInt();
-        auto node = Node::create();
-        node->setAnchorPoint(Vec2(0,0));
-        node->setPosition(Vec2(x,y));
-        node->addComponent(PhysicsBody::createEdgeBox(Size(width,height)));
-        node->getPhysicsBody()->setDynamic(false);
-        node->getPhysicsBody()->setPositionOffset(Vec2(width/2,height/2));
-        this->addChild(node);
-        
+        auto shape = PhysicsShapeBox::create(Size(width, height), PHYSICSSHAPE_MATERIAL_DEFAULT, Vec2(x-(map->getContentSize().width/2)+width/2, y-(map->getContentSize().height/2)+height/2));
+        map->getPhysicsBody()->addShape(shape);
     }
     
-    auto background = Sprite::create("res/MapTMX/MapTest1.png");
-    background->setAnchorPoint(Vec2(0,0));
-    auto edgeBody = PhysicsBody::createEdgeBox(map->getContentSize(), PHYSICSBODY_MATERIAL_DEFAULT, 3);
-    map->setAnchorPoint(Vec2(0,0));
-    map->addComponent(edgeBody);
+    this->getPhysicsWorld()->setGravity(Vec2(0,-1000));
     this->addChild(map);
 
     e1 = Enemy();
@@ -85,6 +79,13 @@ bool Level1::init()
 	backbtn->setPosition(Vec2(player.sprite->getPositionX() - 400, player.sprite->getPositionY() - 200));
 	jumpbtn->setPosition(Vec2(player.sprite->getPositionX(), player.sprite->getPositionY() - 200));
 
+    // creating a keyboard event listener
+    auto listener = EventListenerKeyboard::create();
+    listener->onKeyPressed = CC_CALLBACK_2(Level1::onKeyPressed, this);
+    listener->onKeyReleased = CC_CALLBACK_2(Level1::onKeyReleased, this);
+
+    _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
+    
 	forwardbtn->addTouchEventListener([&](Ref* sender, ui::Widget::TouchEventType type) {		
 		switch (type)
 		{
@@ -145,6 +146,39 @@ void Level1::update(float dt) {
 	player.h1->setPosition(Vec2(player.sprite->getPositionX() - 400, player.sprite->getPositionY() + 250));
 	player.h2->setPosition(Vec2(player.sprite->getPositionX() - 300, player.sprite->getPositionY() + 250));
 	player.h3->setPosition(Vec2(player.sprite->getPositionX() - 200, player.sprite->getPositionY() + 250));
+}
 
-	player.sprite->setRotation(0);
+// Implementation of the keyboard event callback function prototype
+void Level1::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, Event* event)
+{
+        log("Key with keycode %d pressed", keyCode);
+    switch(keyCode){
+        case EventKeyboard::KeyCode::KEY_A:
+            player.sprite->getPhysicsBody()->setVelocity(Vec2(-450, 0));
+            std::cout << "A pressed" << std::endl;
+            break;
+        case EventKeyboard::KeyCode::KEY_D:
+            player.sprite->getPhysicsBody()->setVelocity(Vec2(450, 0));
+            break;
+        case EventKeyboard::KeyCode::KEY_SPACE:
+            player.sprite->getPhysicsBody()->setVelocity(Vec2(0, 600));
+            break;
+    }
+}
+
+void Level1::onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, Event* event)
+{
+        log("Key with keycode %d released", keyCode);
+    switch(keyCode){
+        case EventKeyboard::KeyCode::KEY_A:
+            player.sprite->getPhysicsBody()->setVelocity(Vec2(0, 0));
+            std::cout << "A pressed" << std::endl;
+            break;
+        case EventKeyboard::KeyCode::KEY_D:
+            player.sprite->getPhysicsBody()->setVelocity(Vec2(0, 0));
+            break;
+        case EventKeyboard::KeyCode::KEY_SPACE:
+            player.sprite->getPhysicsBody()->setVelocity(Vec2(0, 0));
+            break;
+    }
 }
