@@ -112,5 +112,6 @@ void Player::setActions(std::string dir){
 }
 
 void Player::stopActions(){
+    sprite->getPhysicsBody()->setVelocity(Vec2(0, 0));
     sprite->stopAllActions();
 }
