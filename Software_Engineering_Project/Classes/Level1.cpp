@@ -1,6 +1,7 @@
 #include "Level1.h"
 #include <vector>
 #include "Player.h"
+#include "Enemy.h"
 #include "ui/CocosGUI.h"
 
 USING_NS_CC;
@@ -10,8 +11,6 @@ Scene* Level1::createScene()
     auto scene = Level1::create();
     scene->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
     scene->getDefaultCamera()->setScale(2, 2);
-    
-
     return scene;
 }
 
@@ -34,90 +33,152 @@ bool Level1::init()
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
     auto map = TMXTiledMap::create("res/MapTMX/MapTest1.tmx");
-    //this->addChild(map, 0, 99);
+    auto collisions = map->getObjectGroup("GroundCollisions");
+    auto arr = collisions->getObjects();
     
     auto background = Sprite::create("res/MapTMX/MapTest1.png");
-    auto edgeBody = PhysicsBody::createEdgeBox(background->getContentSize(), PHYSICSBODY_MATERIAL_DEFAULT, 3);
-    //edgeBody->setGravityEnable(false);
-    background->setPhysicsBody(edgeBody);
-    this->addChild(background);
+    background->setAnchorPoint(Vec2(0,0));
+    auto edgeBody = PhysicsBody::createEdgeBox(map->getContentSize(), PHYSICSBODY_MATERIAL_DEFAULT, 3);
+    map->setAnchorPoint(Vec2(0,0));
+    map->addComponent(edgeBody);
+    
+    for(int i = 0; i < arr.size(); i++){
+        int x = arr[i].asValueMap()["x"].asInt();
+        int y = arr[i].asValueMap()["y"].asInt();
+        int width = arr[i].asValueMap()["width"].asInt();
+        int height = arr[i].asValueMap()["height"].asInt();
+        auto shape = PhysicsShapeBox::create(Size(width, height), PHYSICSSHAPE_MATERIAL_DEFAULT, Vec2(x-(map->getContentSize().width/2)+width/2, y-(map->getContentSize().height/2)+height/2));
+        map->getPhysicsBody()->addShape(shape);
+    }
+    
+    this->getPhysicsWorld()->setGravity(Vec2(0,-1000));
+    this->addChild(map);
+
+    e1 = Enemy();
+    e1.playerBody->setGravityEnable(false);
+    this->addChild(e1.sprite);
+	e1.sprite->runAction(RepeatForever::create(e1.animateMove));
+    
 
     player = Player("Bob", "Green");
-    player.sprite->getPhysicsBody()->setGravityEnable(false);
     this->addChild(player.sprite);
-    //this->getDefaultCamera()->setScale(0.5f);
-
+	
     player.sprite->runAction(RepeatForever::create(player.animateWalk));
 
-
-    forwardButton = ui::Button::create("res/PNG/HUD/hudJewel_green_empty.png", "res/PNG/HUD/hudJewel_green.png");
-    backwardButton = ui::Button::create("res/PNG/HUD/hudJewel_green_empty.png", "res/PNG/HUD/hudJewel_green.png");
-    jumpButton = ui::Button::create("res/PNG/HUD/hudJewel_green_empty.png", "res/PNG/HUD/hudJewel_green.png");
-
-    forwardButton->setPosition(Vec2(player.sprite->getPositionX() + 400, player.sprite->getPositionY() - 200));
-    backwardButton->setPosition(Vec2(player.sprite->getPositionX() - 400, player.sprite->getPositionY() - 200));
-    jumpButton->setPosition(Vec2(player.sprite->getPositionX(), player.sprite->getPositionY() - 200));
-
-    forwardButton->addTouchEventListener([&](Ref* sender, ui::Widget::TouchEventType type) {
-        auto moveBy = MoveBy::create(0.5f, Vec2(40, 0));
-        switch (type)
-        {
-        case ui::Widget::TouchEventType::BEGAN:
-            player.sprite->runAction(moveBy);
-            this->getDefaultCamera()->setPosition(player.sprite->getPosition());
-            forwardButton->setPosition(Vec2(player.sprite->getPositionX() + 400, player.sprite->getPositionY() - 200));
-            backwardButton->setPosition(Vec2(player.sprite->getPositionX() - 400, player.sprite->getPositionY() - 200));
-            jumpButton->setPosition(Vec2(player.sprite->getPositionX(), player.sprite->getPositionY() - 200));
-
-            break;
-        case ui::Widget::TouchEventType::ENDED:
-           
-            break;
-        default:
-            break;
-        }
-        });
+	this->addChild(player.h1);
+	this->addChild(player.h2);
+	this->addChild(player.h3);
     
-    backwardButton->addTouchEventListener([&](Ref* sender, ui::Widget::TouchEventType type) {
-        auto moveBy = MoveBy::create(0.5f, Vec2(-40, 0));
-        switch (type)
-        {
-        case ui::Widget::TouchEventType::BEGAN:
-            player.sprite->runAction(moveBy);
-            this->getDefaultCamera()->setPosition(player.sprite->getPosition());
-            forwardButton->setPosition(Vec2(player.sprite->getPositionX() + 400, player.sprite->getPositionY() - 200));
-            backwardButton->setPosition(Vec2(player.sprite->getPositionX() - 400, player.sprite->getPositionY() - 200));
-            jumpButton->setPosition(Vec2(player.sprite->getPositionX(), player.sprite->getPositionY() - 200));
-            break;
-        case ui::Widget::TouchEventType::ENDED:
 
-            break;
-        default:
-            break;
-        }
-        });
 
-    jumpButton->addTouchEventListener([&](Ref* sender, ui::Widget::TouchEventType type) {
-        auto moveBy = MoveBy::create(0.5f, Vec2(0, 50));
-        switch (type)
-        {
-        case ui::Widget::TouchEventType::BEGAN:
-            player.sprite->runAction(moveBy);
-            this->getDefaultCamera()->setPosition(player.sprite->getPosition());
-            forwardButton->setPosition(Vec2(player.sprite->getPositionX() + 400, player.sprite->getPositionY() - 200));
-            backwardButton->setPosition(Vec2(player.sprite->getPositionX() - 400, player.sprite->getPositionY() - 200));
-            jumpButton->setPosition(Vec2(player.sprite->getPositionX(), player.sprite->getPositionY() - 200));
-            
-            break;
-        case ui::Widget::TouchEventType::ENDED:
+	forwardbtn = ui::Button::create("res/PNG/HUD/hudJewel_green_empty.png", "res/PNG/HUD/hudJewel_green.png");
+	backbtn = ui::Button::create("res/PNG/HUD/hudJewel_green_empty.png", "res/PNG/HUD/hudJewel_green.png");
+	jumpbtn = ui::Button::create("res/PNG/HUD/hudJewel_green_empty.png", "res/PNG/HUD/hudJewel_green.png");
 
-            break;
-        default:
-            break;
-        }
-        });
-    this->addChild(forwardButton);
-    this->addChild(backwardButton);
-    this->addChild(jumpButton);
+	forwardbtn->setPosition(Vec2(player.sprite->getPositionX() + 400, player.sprite->getPositionY() - 200));
+	backbtn->setPosition(Vec2(player.sprite->getPositionX() - 400, player.sprite->getPositionY() - 200));
+	jumpbtn->setPosition(Vec2(player.sprite->getPositionX(), player.sprite->getPositionY() - 200));
+
+    // creating a keyboard event listener
+    auto listener = EventListenerKeyboard::create();
+    listener->onKeyPressed = CC_CALLBACK_2(Level1::onKeyPressed, this);
+    listener->onKeyReleased = CC_CALLBACK_2(Level1::onKeyReleased, this);
+
+    _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
+    
+	forwardbtn->addTouchEventListener([&](Ref* sender, ui::Widget::TouchEventType type) {		
+		switch (type)
+		{
+		case ui::Widget::TouchEventType::BEGAN:
+			player.sprite->getPhysicsBody()->setVelocity(Vec2(300, 0));
+			break;
+		case ui::Widget::TouchEventType::ENDED:
+			player.sprite->getPhysicsBody()->setVelocity(Vec2(0, 0));
+			break;
+		default:
+			break;
+		}
+		});
+
+	backbtn->addTouchEventListener([&](Ref* sender, ui::Widget::TouchEventType type) {
+		switch (type)
+		{
+		case ui::Widget::TouchEventType::BEGAN:
+			player.sprite->getPhysicsBody()->setVelocity(Vec2(-300, 0));
+			break;
+		case ui::Widget::TouchEventType::ENDED:
+			player.sprite->getPhysicsBody()->setVelocity(Vec2(0, 0));
+			break;
+		default:
+			break;
+		}
+		});
+
+	jumpbtn->addTouchEventListener([&](Ref* sender, ui::Widget::TouchEventType type) {
+		switch (type)
+		{
+		case ui::Widget::TouchEventType::BEGAN:
+			player.sprite->getPhysicsBody()->setVelocity(Vec2(0, 300));
+			break;
+		case ui::Widget::TouchEventType::ENDED:
+			player.sprite->getPhysicsBody()->setVelocity(Vec2(0, 0));
+			break;
+		default:
+			break;
+		}
+		});
+
+	addChild(forwardbtn);
+	addChild(backbtn);
+	addChild(jumpbtn);
+	this->scheduleUpdate();
     return true;
+}
+
+void Level1::update(float dt) {
+	this->getDefaultCamera()->setPosition(player.sprite->getPosition());
+	this->getDefaultCamera()->update(dt);
+
+	forwardbtn->setPosition(Vec2(player.sprite->getPositionX() + 400, player.sprite->getPositionY() - 200));
+	backbtn->setPosition(Vec2(player.sprite->getPositionX() - 400, player.sprite->getPositionY() - 200));
+	jumpbtn->setPosition(Vec2(player.sprite->getPositionX(), player.sprite->getPositionY() - 200));
+
+	player.h1->setPosition(Vec2(player.sprite->getPositionX() - 400, player.sprite->getPositionY() + 250));
+	player.h2->setPosition(Vec2(player.sprite->getPositionX() - 300, player.sprite->getPositionY() + 250));
+	player.h3->setPosition(Vec2(player.sprite->getPositionX() - 200, player.sprite->getPositionY() + 250));
+}
+
+// Implementation of the keyboard event callback function prototype
+void Level1::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, Event* event)
+{
+        log("Key with keycode %d pressed", keyCode);
+    switch(keyCode){
+        case EventKeyboard::KeyCode::KEY_A:
+            player.sprite->getPhysicsBody()->setVelocity(Vec2(-450, 0));
+            std::cout << "A pressed" << std::endl;
+            break;
+        case EventKeyboard::KeyCode::KEY_D:
+            player.sprite->getPhysicsBody()->setVelocity(Vec2(450, 0));
+            break;
+        case EventKeyboard::KeyCode::KEY_SPACE:
+            player.sprite->getPhysicsBody()->setVelocity(Vec2(0, 600));
+            break;
+    }
+}
+
+void Level1::onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, Event* event)
+{
+        log("Key with keycode %d released", keyCode);
+    switch(keyCode){
+        case EventKeyboard::KeyCode::KEY_A:
+            player.sprite->getPhysicsBody()->setVelocity(Vec2(0, 0));
+            std::cout << "A pressed" << std::endl;
+            break;
+        case EventKeyboard::KeyCode::KEY_D:
+            player.sprite->getPhysicsBody()->setVelocity(Vec2(0, 0));
+            break;
+        case EventKeyboard::KeyCode::KEY_SPACE:
+            player.sprite->getPhysicsBody()->setVelocity(Vec2(0, 0));
+            break;
+    }
 }

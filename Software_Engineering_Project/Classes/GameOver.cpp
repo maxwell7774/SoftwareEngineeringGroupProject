@@ -1,11 +1,12 @@
-#include "MainMenu.h"
+#include "GameOver.h"
+#include "GameOver.h"
 #include "LevelMenu.h"
 
 USING_NS_CC;
 
-Scene* MainMenu::createScene()
+Scene* GameOver::createScene()
 {
-    return MainMenu::create();
+    return GameOver::create();
 }
 
 // Print useful error message instead of segfaulting when files are not there.
@@ -16,10 +17,10 @@ static void problemLoading(const char* filename)
 }
 
 // on "init" you need to initialize your instance
-bool MainMenu::init()
+bool GameOver::init()
 {
     // 1. super init first
-    if ( !Scene::init() )
+    if (!Scene::init())
     {
         return false;
     }
@@ -32,14 +33,14 @@ bool MainMenu::init()
     background->setPosition(Director::getInstance()->getVisibleSize().width / 2, Director::getInstance()->getVisibleSize().height / 2);
     this->addChild(background);
 
-    auto title = Label::createWithSystemFont("Send Me Home!", "Arial", 48);
-    title->setPosition(Vec2(Director::getInstance()->getVisibleSize().width/2, 3*Director::getInstance()->getVisibleSize().height/4));
+    auto title = Label::createWithSystemFont("Game Over!", "Arial", 48);
+    title->setPosition(Vec2(Director::getInstance()->getVisibleSize().width / 2, 3 * Director::getInstance()->getVisibleSize().height / 4));
     title->setColor(Color3B::BLACK);
     this->addChild(title);
 
-    auto play = MenuItemImage::create("res/PNG/tiles/boxCrate.png", "res/PNG/tiles/boxCrate_double.png", CC_CALLBACK_1(MainMenu::toLevelMenu, this));
+    auto play = MenuItemImage::create("res/PNG/tiles/boxCrate.png", "res/PNG/tiles/boxCrate_double.png", CC_CALLBACK_1(GameOver::toLevelMenu, this));
 
-    auto playText = Label::createWithSystemFont("Play", "Arial", 20);
+    auto playText = Label::createWithSystemFont("Play Again", "Arial", 20);
     playText->setPosition(Vec2(Director::getInstance()->getVisibleSize().width / 2, Director::getInstance()->getVisibleSize().height / 3));
 
     // create menu, it's an autorelease object
@@ -52,8 +53,8 @@ bool MainMenu::init()
 }
 
 
-void MainMenu::toLevelMenu(Ref* pSender)
+void GameOver::toLevelMenu(Ref* pSender)
 {
     auto lvlmenu = LevelMenu::createScene();
-    Director::getInstance()->replaceScene(TransitionFade::create(0.5f,lvlmenu));
+    Director::getInstance()->replaceScene(TransitionFade::create(0.5f, lvlmenu));
 }
