@@ -21,6 +21,12 @@ public:
 	Vector<SpriteFrame*> move;
 
 	Animate* animateMove;
+	MoveBy* flyUp = MoveBy::create(4.0f, Vec2(0, 256));
+	MoveBy* flyDown = MoveBy::create(4.0f, Vec2(0, -256));
+	DelayTime* wait = DelayTime::create(5.0f);
+
+	Sequence* flyAround = Sequence::create(flyUp, wait, flyDown, wait, nullptr);
+
 
 	Enemy();
 	//Enemy(std::string name, std::string color);

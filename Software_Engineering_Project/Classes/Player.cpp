@@ -1,25 +1,25 @@
 #include "Player.h"
+#include "GameOver.h"
 
 Player::Player() {
 	x = 0;
 	y = 0;
 	lives = 3;
+	color = "Yellow";
 
 	sprite = Sprite::create("res/PNG/Players/128x256/Yellow/alienYellow_stand.png");
 	playerBody = PhysicsBody::createBox(Size(110, 138), PhysicsMaterial(0, 1, 0));
 	playerBody->setPositionOffset(Vec2(0, -60));
 	sprite->setPhysicsBody(playerBody);
 	sprite->setPosition(Director::getInstance()->getVisibleSize().width / 2, Director::getInstance()->getVisibleSize().height / 2);
+	
 
 	walk.pushBack(SpriteFrame::create("res/PNG/Players/128x256/Yellow/alienYellow_walk1.png", Rect(0, 0, sprite->getContentSize().width, sprite->getContentSize().height)));
 	walk.pushBack(SpriteFrame::create("res/PNG/Players/128x256/Yellow/alienYellow_walk2.png", Rect(0, 0, sprite->getContentSize().width, sprite->getContentSize().height)));
-	animateWalk = Animate::create(Animation::createWithSpriteFrames(walk, 0.15f));
 
 	jump.pushBack(SpriteFrame::create("res/PNG/Players/128x256/Yellow/alienYellow_jump.png", Rect(0, 0, sprite->getContentSize().width, sprite->getContentSize().height)));
-	animateJump = Animate::create(Animation::createWithSpriteFrames(jump, 0.15f));
 
 	duck.pushBack(SpriteFrame::create("res/PNG/Players/128x256/Yellow/alienYellow_duck.png", Rect(0, 0, sprite->getContentSize().width, sprite->getContentSize().height)));
-	animateDuck = Animate::create(Animation::createWithSpriteFrames(duck, 0.15f));
 
 	h1 = Sprite::create("res/PNG/HUD/hudHeart_full.png");
 	h2 = Sprite::create("res/PNG/HUD/hudHeart_full.png");
@@ -35,23 +35,25 @@ Player::Player(std::string name, std::string color) {
     y = 600;
     lives = 3;
     this->name = name;
+	this->color = color;
+    aPressed = true;
+    dPressed = true;
+    spacePressed = true;
 
     sprite = Sprite::create("res/PNG/Players/128x256/"+color+"/alien"+color+"_stand.png");
     playerBody = PhysicsBody::createBox(Size(80, 138), PhysicsMaterial(0, 0, 0));
     playerBody->setPositionOffset(Vec2(0, -60));
+    playerBody->setRotationEnable(false);
     sprite->setPhysicsBody(playerBody);
     sprite->setPosition( x, y );
-    playerBody->setRotationEnable(false);
+
 
     walk.pushBack(SpriteFrame::create("res/PNG/Players/128x256/" + color + "/alien" + color + "_walk1.png", Rect(0, 0, sprite->getContentSize().width, sprite->getContentSize().height)));
     walk.pushBack(SpriteFrame::create("res/PNG/Players/128x256/" + color + "/alien" + color + "_walk2.png", Rect(0, 0, sprite->getContentSize().width, sprite->getContentSize().height)));
-    animateWalk = Animate::create(Animation::createWithSpriteFrames(walk, 0.15f));
 
     jump.pushBack(SpriteFrame::create("res/PNG/Players/128x256/" + color + "/alien" + color + "_jump.png", Rect(0, 0, sprite->getContentSize().width, sprite->getContentSize().height)));
-    animateJump = Animate::create(Animation::createWithSpriteFrames(jump, 0.15f));
 
     duck.pushBack(SpriteFrame::create("res/PNG/Players/128x256/" + color + "/alien" + color + "_duck.png", Rect(0, 0, sprite->getContentSize().width, sprite->getContentSize().height)));
-    animateDuck = Animate::create(Animation::createWithSpriteFrames(duck, 0.15f));
 
     h1 = Sprite::create("res/PNG/HUD/hudHeart_full.png");
     h2 = Sprite::create("res/PNG/HUD/hudHeart_full.png");
@@ -74,7 +76,11 @@ void Player::subtractLife() {
 		if (getLives() == 1) {
 			h2->setTexture("res/PNG/HUD/hudHeart_empty.png");
 		}
-
+        if (getLives() == 0) {
+            h1->setTexture("res/PNG/HUD/hudHeart_empty.png");
+            auto gameover = GameOver::createScene();
+            Director::getInstance()->replaceScene(TransitionFade::create(0.5f, gameover));
+        }
 	}
 }
 
@@ -82,4 +88,56 @@ bool Player::isAlive() {
 	if (lives > 0)
 		return true;
 	return false;
+}
+
+void Player::setActions(std::string dir){
+    auto animateWalk = Animate::create(Animation::createWithSpriteFrames(walk, 0.15f));
+    auto animateJump = Animate::create(Animation::createWithSpriteFrames(jump, 0.15f));
+    stopActions();
+    
+    if(dir == "left"){
+        aPressed = true;
+        dPressed = false;
+        sprite->setFlippedX(true);
+        sprite->runAction(RepeatForever::create(animateWalk));
+        sprite->getPhysicsBody()->setVelocity(Vec2(-450, sprite->getPhysicsBody()->getVelocity().y));
+    }
+    else if(dir == "right"){
+        dPressed = true;
+        aPressed = false;
+        sprite->setFlippedX(false);
+        sprite->runAction(RepeatForever::create(animateWalk));
+        sprite->getPhysicsBody()->setVelocity(Vec2(450, sprite->getPhysicsBody()->getVelocity().y));
+    }
+    else if(dir == "jump"){
+        spacePressed = true;
+        sprite->runAction(RepeatForever::create(animateJump));
+        if(aPressed && !dPressed){
+            sprite->getPhysicsBody()->setVelocity(Vec2(-450, 600));
+        }
+        else if(dPressed && !aPressed){
+            sprite->getPhysicsBody()->setVelocity(Vec2(450, 600));
+        }
+        else{
+            sprite->getPhysicsBody()->setVelocity(Vec2(0, 600));
+        }
+    }
+    
+}
+
+void Player::stopActions(){
+    sprite->stopAllActions();
+}
+
+void Player::switchKey(char key){
+    if(key == 'a')
+        aPressed = false;
+    else if(key == 'd')
+        dPressed = false;
+    else if(key == 's')
+        spacePressed = false;
+    if(!aPressed && !dPressed && !spacePressed){
+        sprite->getPhysicsBody()->setVelocity(Vec2(0,0));
+        stopActions();
+    }
 }

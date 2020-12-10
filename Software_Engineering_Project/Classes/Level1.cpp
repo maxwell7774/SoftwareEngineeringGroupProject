@@ -9,7 +9,7 @@ USING_NS_CC;
 Scene* Level1::createScene()
 {
     auto scene = Level1::create();
-    scene->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
+//    scene->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
     scene->getDefaultCamera()->setScale(2, 2);
     return scene;
 }
@@ -58,26 +58,19 @@ bool Level1::init()
     e1.playerBody->setGravityEnable(false);
     this->addChild(e1.sprite);
 	e1.sprite->runAction(RepeatForever::create(e1.animateMove));
+    e1.sprite->runAction(RepeatForever::create(e1.flyAround));
     
 
     player = Player("Bob", "Green");
     this->addChild(player.sprite);
 	
-    player.sprite->runAction(RepeatForever::create(player.animateWalk));
+
+    //player.sprite->runAction(RepeatForever::create(player.animateWalk));
 
 	this->addChild(player.h1);
 	this->addChild(player.h2);
 	this->addChild(player.h3);
     
-
-
-	forwardbtn = ui::Button::create("res/PNG/HUD/hudJewel_green_empty.png", "res/PNG/HUD/hudJewel_green.png");
-	backbtn = ui::Button::create("res/PNG/HUD/hudJewel_green_empty.png", "res/PNG/HUD/hudJewel_green.png");
-	jumpbtn = ui::Button::create("res/PNG/HUD/hudJewel_green_empty.png", "res/PNG/HUD/hudJewel_green.png");
-
-	forwardbtn->setPosition(Vec2(player.sprite->getPositionX() + 400, player.sprite->getPositionY() - 200));
-	backbtn->setPosition(Vec2(player.sprite->getPositionX() - 400, player.sprite->getPositionY() - 200));
-	jumpbtn->setPosition(Vec2(player.sprite->getPositionX(), player.sprite->getPositionY() - 200));
 
     // creating a keyboard event listener
     auto listener = EventListenerKeyboard::create();
@@ -85,52 +78,7 @@ bool Level1::init()
     listener->onKeyReleased = CC_CALLBACK_2(Level1::onKeyReleased, this);
 
     _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
-    
-	forwardbtn->addTouchEventListener([&](Ref* sender, ui::Widget::TouchEventType type) {		
-		switch (type)
-		{
-		case ui::Widget::TouchEventType::BEGAN:
-			player.sprite->getPhysicsBody()->setVelocity(Vec2(300, 0));
-			break;
-		case ui::Widget::TouchEventType::ENDED:
-			player.sprite->getPhysicsBody()->setVelocity(Vec2(0, 0));
-			break;
-		default:
-			break;
-		}
-		});
 
-	backbtn->addTouchEventListener([&](Ref* sender, ui::Widget::TouchEventType type) {
-		switch (type)
-		{
-		case ui::Widget::TouchEventType::BEGAN:
-			player.sprite->getPhysicsBody()->setVelocity(Vec2(-300, 0));
-			break;
-		case ui::Widget::TouchEventType::ENDED:
-			player.sprite->getPhysicsBody()->setVelocity(Vec2(0, 0));
-			break;
-		default:
-			break;
-		}
-		});
-
-	jumpbtn->addTouchEventListener([&](Ref* sender, ui::Widget::TouchEventType type) {
-		switch (type)
-		{
-		case ui::Widget::TouchEventType::BEGAN:
-			player.sprite->getPhysicsBody()->setVelocity(Vec2(0, 300));
-			break;
-		case ui::Widget::TouchEventType::ENDED:
-			player.sprite->getPhysicsBody()->setVelocity(Vec2(0, 0));
-			break;
-		default:
-			break;
-		}
-		});
-
-	addChild(forwardbtn);
-	addChild(backbtn);
-	addChild(jumpbtn);
 	this->scheduleUpdate();
     return true;
 }
@@ -138,10 +86,6 @@ bool Level1::init()
 void Level1::update(float dt) {
 	this->getDefaultCamera()->setPosition(player.sprite->getPosition());
 	this->getDefaultCamera()->update(dt);
-
-	forwardbtn->setPosition(Vec2(player.sprite->getPositionX() + 400, player.sprite->getPositionY() - 200));
-	backbtn->setPosition(Vec2(player.sprite->getPositionX() - 400, player.sprite->getPositionY() - 200));
-	jumpbtn->setPosition(Vec2(player.sprite->getPositionX(), player.sprite->getPositionY() - 200));
 
 	player.h1->setPosition(Vec2(player.sprite->getPositionX() - 400, player.sprite->getPositionY() + 250));
 	player.h2->setPosition(Vec2(player.sprite->getPositionX() - 300, player.sprite->getPositionY() + 250));
@@ -151,34 +95,36 @@ void Level1::update(float dt) {
 // Implementation of the keyboard event callback function prototype
 void Level1::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, Event* event)
 {
+
         log("Key with keycode %d pressed", keyCode);
     switch(keyCode){
         case EventKeyboard::KeyCode::KEY_A:
-            player.sprite->getPhysicsBody()->setVelocity(Vec2(-450, 0));
-            std::cout << "A pressed" << std::endl;
+            player.setActions("left");
             break;
         case EventKeyboard::KeyCode::KEY_D:
-            player.sprite->getPhysicsBody()->setVelocity(Vec2(450, 0));
+            player.setActions("right");
             break;
         case EventKeyboard::KeyCode::KEY_SPACE:
-            player.sprite->getPhysicsBody()->setVelocity(Vec2(0, 600));
+            player.setActions("jump");
             break;
     }
 }
 
 void Level1::onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, Event* event)
 {
-        log("Key with keycode %d released", keyCode);
     switch(keyCode){
         case EventKeyboard::KeyCode::KEY_A:
-            player.sprite->getPhysicsBody()->setVelocity(Vec2(0, 0));
-            std::cout << "A pressed" << std::endl;
+            player.switchKey('a');
             break;
         case EventKeyboard::KeyCode::KEY_D:
-            player.sprite->getPhysicsBody()->setVelocity(Vec2(0, 0));
+            player.switchKey('d');
             break;
         case EventKeyboard::KeyCode::KEY_SPACE:
-            player.sprite->getPhysicsBody()->setVelocity(Vec2(0, 0));
+            player.switchKey('s');
             break;
     }
+}
+
+void toLevel2(cocos2d::Ref* pSender) {
+
 }
