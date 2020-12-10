@@ -86,3 +86,27 @@ bool Player::isAlive() {
 		return true;
 	return false;
 }
+
+void Player::setActions(std::string dir){
+    auto animateWalk = Animate::create(Animation::createWithSpriteFrames(walk, 0.15f));
+    auto animateJump = Animate::create(Animation::createWithSpriteFrames(jump, 0.15f));
+    
+    if(dir == "left"){
+        sprite->setFlippedX(true);
+        sprite->runAction(RepeatForever::create(animateWalk));
+        sprite->getPhysicsBody()->setVelocity(Vec2(-450, 0));
+    }
+    else if(dir == "right"){
+        sprite->setFlippedX(false);
+        sprite->runAction(RepeatForever::create(animateWalk));
+        sprite->getPhysicsBody()->setVelocity(Vec2(450, 0));
+    }
+    else if(dir == "jump"){
+        sprite->runAction(animateJump);
+        sprite->getPhysicsBody()->setVelocity(Vec2(0, 600));
+    }
+}
+
+void Player::stopActions(){
+    sprite->stopAllActions();
+}

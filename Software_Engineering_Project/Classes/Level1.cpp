@@ -94,34 +94,17 @@ void Level1::update(float dt) {
 // Implementation of the keyboard event callback function prototype
 void Level1::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, Event* event)
 {
-    Vector<SpriteFrame*> walk;
-    Vector<SpriteFrame*> jump;
-
-
-    walk.pushBack(SpriteFrame::create("res/PNG/Players/128x256/" + player.color + "/alien" + player.color + "_walk1.png", Rect(0, 0, player.sprite->getContentSize().width, player.sprite->getContentSize().height)));
-    walk.pushBack(SpriteFrame::create("res/PNG/Players/128x256/" + player.color + "/alien" + player.color + "_walk2.png", Rect(0, 0, player.sprite->getContentSize().width, player.sprite->getContentSize().height)));
-    auto animateWalk = Animate::create(Animation::createWithSpriteFrames(walk, 0.15f));
-
-    jump.pushBack(SpriteFrame::create("res/PNG/Players/128x256/" + player.color + "/alien" + player.color + "_jump.png", Rect(0, 0, player.sprite->getContentSize().width, player.sprite->getContentSize().height)));
-    auto animateJump = Animate::create(Animation::createWithSpriteFrames(jump, 0.15f));
-
 
         log("Key with keycode %d pressed", keyCode);
     switch(keyCode){
         case EventKeyboard::KeyCode::KEY_A:
-            player.sprite->setFlippedX(true);
-            player.sprite->runAction(RepeatForever::create(animateWalk));
-            player.sprite->getPhysicsBody()->setVelocity(Vec2(-450, 0));
-            std::cout << "A pressed" << std::endl;
+            player.setActions("left");
             break;
         case EventKeyboard::KeyCode::KEY_D:
-            player.sprite->setFlippedX(false);
-            player.sprite->runAction(RepeatForever::create(animateWalk));
-            player.sprite->getPhysicsBody()->setVelocity(Vec2(450, 0));
+            player.setActions("right");
             break;
         case EventKeyboard::KeyCode::KEY_SPACE:
-            player.sprite->runAction(RepeatForever::create(animateJump));
-            player.sprite->getPhysicsBody()->setVelocity(Vec2(0, 600));
+            player.setActions("jump");
             break;
     }
 }
@@ -132,16 +115,16 @@ void Level1::onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, Event* event
     switch(keyCode){
         case EventKeyboard::KeyCode::KEY_A:
             player.sprite->getPhysicsBody()->setVelocity(Vec2(0, 0));
-            player.sprite->stopAllActions();
+            player.stopActions();
             std::cout << "A pressed" << std::endl;
             break;
         case EventKeyboard::KeyCode::KEY_D:
             player.sprite->getPhysicsBody()->setVelocity(Vec2(0, 0));
-            player.sprite->stopAllActions();
+            player.stopActions();
             break;
         case EventKeyboard::KeyCode::KEY_SPACE:
             player.sprite->getPhysicsBody()->setVelocity(Vec2(0, 0));
-            player.sprite->stopAllActions();
+            player.stopActions();
             break;
     }
 }

@@ -37,6 +37,8 @@ public:
 	
 	void subtractLife();
 	bool isAlive();
+    void setActions(std::string dir);
+    void stopActions();
 
 	Sprite* h1;
 	Sprite* h2;
