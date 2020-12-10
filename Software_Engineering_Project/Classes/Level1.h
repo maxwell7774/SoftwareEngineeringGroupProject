@@ -14,7 +14,7 @@ public:
 
     virtual bool init();
     void update(float);
-
+    void toLevel2(cocos2d::Ref* pSender);
     CREATE_FUNC(Level1);
     Player player;
     Enemy e1;
