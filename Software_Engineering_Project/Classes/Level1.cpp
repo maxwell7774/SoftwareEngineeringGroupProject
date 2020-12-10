@@ -38,7 +38,7 @@ bool Level1::init()
     
     auto background = Sprite::create("res/MapTMX/MapTest1.png");
     background->setAnchorPoint(Vec2(0,0));
-    auto edgeBody = PhysicsBody::createEdgeBox(map->getContentSize(), PHYSICSBODY_MATERIAL_DEFAULT, 3);
+    auto edgeBody = PhysicsBody::createEdgeBox(map->getContentSize(), PhysicsMaterial(0,0,0), 3);
     map->setAnchorPoint(Vec2(0,0));
     map->addComponent(edgeBody);
     
@@ -47,7 +47,7 @@ bool Level1::init()
         int y = arr[i].asValueMap()["y"].asInt();
         int width = arr[i].asValueMap()["width"].asInt();
         int height = arr[i].asValueMap()["height"].asInt();
-        auto shape = PhysicsShapeBox::create(Size(width, height), PHYSICSSHAPE_MATERIAL_DEFAULT, Vec2(x-(map->getContentSize().width/2)+width/2, y-(map->getContentSize().height/2)+height/2));
+        auto shape = PhysicsShapeBox::create(Size(width, height), PhysicsMaterial(0,0,0), Vec2(x-(map->getContentSize().width/2)+width/2, y-(map->getContentSize().height/2)+height/2));
         map->getPhysicsBody()->addShape(shape);
     }
     
