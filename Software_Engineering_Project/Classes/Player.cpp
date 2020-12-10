@@ -15,6 +15,8 @@ Player::Player() {
 	playerBody->setPositionOffset(Vec2(0, -60));
 	sprite->setPhysicsBody(playerBody);
 	sprite->setPosition(Director::getInstance()->getVisibleSize().width / 2, Director::getInstance()->getVisibleSize().height / 2);
+    sprite->getPhysicsBody()->setCollisionBitmask(2);
+    sprite->getPhysicsBody()->setContactTestBitmask(true);
 	
 
 	walk.pushBack(SpriteFrame::create("res/PNG/Players/128x256/Yellow/alienYellow_walk1.png", Rect(0, 0, sprite->getContentSize().width, sprite->getContentSize().height)));
@@ -51,6 +53,8 @@ Player::Player(std::string name, std::string color) {
     playerBody->setRotationEnable(false);
     sprite->setPhysicsBody(playerBody);
     sprite->setPosition( x, y );
+    sprite->getPhysicsBody()->setCollisionBitmask(2);
+    sprite->getPhysicsBody()->setContactTestBitmask(true);
 
 
     walk.pushBack(SpriteFrame::create("res/PNG/Players/128x256/" + color + "/alien" + color + "_walk1.png", Rect(0, 0, sprite->getContentSize().width, sprite->getContentSize().height)));

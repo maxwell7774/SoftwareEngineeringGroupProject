@@ -14,20 +14,24 @@ public:
 
     virtual bool init();
     void update(float);
-    void toLevel2(cocos2d::Ref* pSender);
+    void toLevel2();
     CREATE_FUNC(Level1);
     Player player;
     Enemy e1;
     cocos2d::ui::Button* forwardbtn;
     cocos2d::ui::Button* backbtn;
     cocos2d::ui::Button* jumpbtn;
+    
+    Sprite* key;
+    PhysicsBody* keyBody;
+
     void onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, Event* event);
     void onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, Event* event);
     
 private:
     //cocos2d::PhysicsWorld* sceneWorld;
     //void SetPhysicsWorld(cocos2d::PhysicsWorld* world) { sceneWorld = world; };
-   
+    bool onContactBegin(cocos2d::PhysicsContact& contact);
 };
 
 #endif

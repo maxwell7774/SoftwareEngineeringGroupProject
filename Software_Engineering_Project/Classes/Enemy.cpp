@@ -8,6 +8,9 @@ Enemy::Enemy() {
 	playerBody = PhysicsBody::createBox(Size(128, 128), PhysicsMaterial(0, 1, 0));
 	sprite->setPhysicsBody(playerBody);
 	sprite->setPosition(Vec2(500,200));
+	sprite->getPhysicsBody()->setCollisionBitmask(1);
+	sprite->getPhysicsBody()->setContactTestBitmask(true);
+
 
 	move.pushBack(SpriteFrame::create("res/PNG/Enemies/fly.png", Rect(0, 0, sprite->getContentSize().width, sprite->getContentSize().height)));
 	move.pushBack(SpriteFrame::create("res/PNG/Enemies/fly_dead.png", Rect(0, 0, sprite->getContentSize().width, sprite->getContentSize().height)));

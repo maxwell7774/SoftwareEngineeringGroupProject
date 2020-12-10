@@ -48,7 +48,9 @@ bool Level1::init()
         auto shape = PhysicsShapeBox::create(Size(width, height), PhysicsMaterial(0,0,0), Vec2(x-(background->getContentSize().width/2)+width/2, y-(background->getContentSize().height/2)+height/2));
         background->getPhysicsBody()->addShape(shape);
     }
-    
+    background->getPhysicsBody()->setCollisionBitmask(3);
+    background->getPhysicsBody()->setContactTestBitmask(true);
+
     this->getPhysicsWorld()->setGravity(Vec2(0,-1000));
     this->addChild(background);
 
@@ -65,6 +67,15 @@ bool Level1::init()
 	this->addChild(player.h1);
 	this->addChild(player.h2);
 	this->addChild(player.h3);
+
+    key = Sprite::create("res/PNG/Items/keyBlue.png");
+    keyBody = PhysicsBody::createBox(Size(128, 128), PhysicsMaterial(0, 1, 0));
+    key->setPhysicsBody(keyBody);
+    key->setPosition(Vec2(400, 800));
+    key->getPhysicsBody()->setCollisionBitmask(9);
+    key->getPhysicsBody()->setContactTestBitmask(true);
+
+    this->addChild(key);
     
 
     // creating a keyboard event listener
@@ -73,6 +84,10 @@ bool Level1::init()
     listener->onKeyReleased = CC_CALLBACK_2(Level1::onKeyReleased, this);
 
     _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
+
+    auto contactListener = EventListenerPhysicsContact::create();
+    contactListener->onContactBegin = CC_CALLBACK_1(Level1::onContactBegin, this);
+    this->getEventDispatcher()->addEventListenerWithSceneGraphPriority(contactListener, this);
 
 	this->scheduleUpdate();
     return true;
@@ -120,6 +135,25 @@ void Level1::onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, Event* event
     }
 }
 
-void toLevel2(cocos2d::Ref* pSender) {
+void Level1::toLevel2() {
+    CCLOG("Go to next Level!");
+}
 
+bool Level1::onContactBegin(cocos2d::PhysicsContact& contact) {
+    PhysicsBody* a = contact.getShapeA()->getBody();
+    PhysicsBody* b = contact.getShapeB()->getBody();
+    if ((1 == a->getCollisionBitmask() && 2 == b->getCollisionBitmask()) || (2 == a->getCollisionBitmask() && 1 == b->getCollisionBitmask())) {
+        CCLOG("Collision has occurred.");
+        player.subtractLife();
+    }
+
+    if ((3 == a->getCollisionBitmask() && 2 == b->getCollisionBitmask()) || (2 == a->getCollisionBitmask() && 3 == b->getCollisionBitmask())) {
+        CCLOG("On Ground.");
+    }
+
+    if ((9 == a->getCollisionBitmask() && 2 == b->getCollisionBitmask()) || (2 == a->getCollisionBitmask() && 9 == b->getCollisionBitmask())) {
+        toLevel2();
+    }
+
+    return true;
 }
