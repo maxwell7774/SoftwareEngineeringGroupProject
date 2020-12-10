@@ -79,6 +79,7 @@ void Player::subtractLife() {
 			h2->setTexture("res/PNG/HUD/hudHeart_empty.png");
 		}
         if (getLives() == 0) {
+            h1->setTexture("res/PNG/HUD/hudHeart_empty.png");
             auto gameover = GameOver::createScene();
             Director::getInstance()->replaceScene(TransitionFade::create(0.5f, gameover));
         }
