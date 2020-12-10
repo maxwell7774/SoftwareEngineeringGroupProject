@@ -1,5 +1,7 @@
 #include "LevelMenu.h"
 #include "Level1.h"
+#include "GameOver.h"
+#include "MainMenu.h"
 USING_NS_CC;
 
 Scene* LevelMenu::createScene()
@@ -60,6 +62,11 @@ bool LevelMenu::init()
     lvl5->setPosition(Vec2(0, -140));
     MenuItems.pushBack(lvl5);
 
+    auto back = MenuItemLabel::create(Label::createWithSystemFont("Back", "Arial", 24), CC_CALLBACK_1(LevelMenu::toMainMenu, this));
+    back->setColor(Color3B::BLACK);
+    back->setPosition(Vec2(-200, 140));
+    MenuItems.pushBack(back);
+
 
     // create menu, it's an autorelease object
     auto menu = Menu::createWithArray(MenuItems);
@@ -84,5 +91,10 @@ void LevelMenu::toLevel4(cocos2d::Ref* pSender) {
 
 }
 void LevelMenu::toLevel5(cocos2d::Ref* pSender) {
-
+    auto level1 = GameOver::createScene();
+    Director::getInstance()->replaceScene(TransitionFade::create(0.5f, level1));
+}
+void LevelMenu::toMainMenu(cocos2d::Ref* pSender) {
+    auto main = MainMenu::createScene();
+    Director::getInstance()->replaceScene(TransitionFade::create(0.5f, main));
 }

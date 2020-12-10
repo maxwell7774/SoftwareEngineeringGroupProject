@@ -16,6 +16,7 @@ public:
     void toLevel3(cocos2d::Ref* pSender);
     void toLevel4(cocos2d::Ref* pSender);
     void toLevel5(cocos2d::Ref* pSender);
+    void toMainMenu(cocos2d::Ref* pSender);
 
     // implement the "static create()" method manually
     CREATE_FUNC(LevelMenu);
