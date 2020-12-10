@@ -12,6 +12,7 @@ class Player {
 
 private:
 	int lives, x, y;
+    bool aPressed, dPressed, spacePressed;
 	std::string name;
 	
 
@@ -23,10 +24,6 @@ public:
 	Vector<SpriteFrame*> walk;
 	Vector<SpriteFrame*> jump;
 	Vector<SpriteFrame*> duck;
-	
-	Animate* animateWalk;
-	Animate* animateJump;
-	Animate* animateDuck;
 
 	Player();
 	Player(std::string name, std::string color);
@@ -39,6 +36,7 @@ public:
 	bool isAlive();
     void setActions(std::string dir);
     void stopActions();
+    void switchKey(char key);
 
 	Sprite* h1;
 	Sprite* h2;

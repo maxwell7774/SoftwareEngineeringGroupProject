@@ -9,7 +9,7 @@ USING_NS_CC;
 Scene* Level1::createScene()
 {
     auto scene = Level1::create();
-    scene->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
+//    scene->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
     scene->getDefaultCamera()->setScale(2, 2);
     return scene;
 }
@@ -111,6 +111,15 @@ void Level1::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, Event* event)
 
 void Level1::onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, Event* event)
 {
-    log("Key with keycode %d released", keyCode);
-    player.stopActions();
+    switch(keyCode){
+        case EventKeyboard::KeyCode::KEY_A:
+            player.switchKey('a');
+            break;
+        case EventKeyboard::KeyCode::KEY_D:
+            player.switchKey('d');
+            break;
+        case EventKeyboard::KeyCode::KEY_SPACE:
+            player.switchKey('s');
+            break;
+    }
 }
