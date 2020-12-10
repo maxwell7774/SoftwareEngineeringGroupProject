@@ -13,8 +13,10 @@ class Player {
 private:
 	int lives, x, y;
 	std::string name;
+	
 
 public:
+	std::string color;
 	Sprite* sprite;
 	PhysicsBody* playerBody;
 
@@ -32,6 +34,7 @@ public:
 	int getLives();
 	int getX();
 	int getY();
+	
 	void subtractLife();
 	bool isAlive();
 
