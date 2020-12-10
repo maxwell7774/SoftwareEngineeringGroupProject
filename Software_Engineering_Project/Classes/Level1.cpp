@@ -32,7 +32,7 @@ bool Level1::init()
     auto visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
-    auto map = TMXTiledMap::create("res/MapTMX/MapTest1.tmx");
+    auto map = TMXTiledMap::create("res/MapTMX/mapTest2.tmx");
     auto collisions = map->getObjectGroup("GroundCollisions");
     auto arr = collisions->getObjects();
     
