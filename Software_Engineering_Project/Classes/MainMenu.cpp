@@ -27,19 +27,19 @@ bool MainMenu::init()
     auto visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
-    auto background = Sprite::create("res/PNG/Backgrounds/colored_grass.png");
-    background->setScale(0.5f);
-    background->setPosition(Director::getInstance()->getVisibleSize().width / 2, Director::getInstance()->getVisibleSize().height / 2);
+    auto background = Sprite::create("res/MapTMX/Level2.png");
+    background->setPosition(-1000, Director::getInstance()->getVisibleSize().height / 2);
     this->addChild(background);
 
-    auto title = Label::createWithSystemFont("Send Me Home!", "Arial", 48);
+    auto title = Label::createWithSystemFont("Send Me Home!", "Arial", 140);
     title->setPosition(Vec2(Director::getInstance()->getVisibleSize().width/2, 3*Director::getInstance()->getVisibleSize().height/4));
     title->setColor(Color3B::BLACK);
     this->addChild(title);
 
     auto play = MenuItemImage::create("res/PNG/tiles/boxCrate.png", "res/PNG/tiles/boxCrate_double.png", CC_CALLBACK_1(MainMenu::toLevelMenu, this));
+    play->setScale(2.5, 2.5);
 
-    auto playText = Label::createWithSystemFont("Play", "Arial", 20);
+    auto playText = Label::createWithSystemFont("Play", "Arial", 100);
     playText->setPosition(Vec2(Director::getInstance()->getVisibleSize().width / 2, Director::getInstance()->getVisibleSize().height / 3));
 
     // create menu, it's an autorelease object
