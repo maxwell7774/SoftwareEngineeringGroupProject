@@ -1,11 +1,11 @@
-#include "GameOver.h"
-#include "LevelMenu.h"
+#include "WinScreen.h"
+#include "MainMenu.h"
 
 USING_NS_CC;
 
-Scene* GameOver::createScene()
+Scene* WinScreen::createScene()
 {
-    return GameOver::create();
+    return WinScreen::create();
 }
 
 // Print useful error message instead of segfaulting when files are not there.
@@ -16,7 +16,7 @@ static void problemLoading(const char* filename)
 }
 
 // on "init" you need to initialize your instance
-bool GameOver::init()
+bool WinScreen::init()
 {
     // 1. super init first
     if (!Scene::init())
@@ -31,15 +31,15 @@ bool GameOver::init()
     background->setPosition(-500, Director::getInstance()->getVisibleSize().height / 2);
     this->addChild(background);
 
-    auto title = Label::createWithSystemFont("Game Over!", "Arial", 140);
+    auto title = Label::createWithSystemFont("You Won!", "Arial", 140);
     title->setPosition(Vec2(Director::getInstance()->getVisibleSize().width / 2, 3 * Director::getInstance()->getVisibleSize().height / 4));
     title->setColor(Color3B::BLACK);
     this->addChild(title);
 
-    auto play = MenuItemImage::create("res/PNG/tiles/boxCrate.png", "res/PNG/tiles/boxCrate_double.png", CC_CALLBACK_1(GameOver::toLevelMenu, this));
+    auto play = MenuItemImage::create("res/PNG/tiles/boxCrate.png", "res/PNG/tiles/boxCrate_double.png", CC_CALLBACK_1(WinScreen::toMainMenu, this));
     play->setScale(2.5, 2.5);
 
-    auto playText = Label::createWithSystemFont("Retry", "Arial", 90);
+    auto playText = Label::createWithSystemFont("Play Again", "Arial", 90);
     playText->setPosition(Vec2(Director::getInstance()->getVisibleSize().width / 2, Director::getInstance()->getVisibleSize().height / 3));
 
     // create menu, it's an autorelease object
@@ -52,8 +52,8 @@ bool GameOver::init()
 }
 
 
-void GameOver::toLevelMenu(Ref* pSender)
+void WinScreen::toMainMenu(Ref* pSender)
 {
-    auto lvlmenu = LevelMenu::createScene();
-    Director::getInstance()->replaceScene(TransitionFade::create(0.5f, lvlmenu));
+    auto menu = MainMenu::createScene();
+    Director::getInstance()->replaceScene(TransitionFade::create(0.5f, menu));
 }

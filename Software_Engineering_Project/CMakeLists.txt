@@ -124,7 +124,7 @@ set(all_code_files
     ${GAME_SOURCE}
     )
 if(NOT ANDROID)
-    add_executable(${APP_NAME} ${all_code_files} "Classes/Player.cpp"   "Classes/Enemy.cpp" "Classes/Enemy.h"   "Classes/LevelMenu.cpp" "Classes/LevelMenu.h" "Classes/GameOver.cpp" "Classes/GameOver.h" "Classes/Level2.cpp" "Classes/Level2.h" "Classes/Level3.cpp" "Classes/Level3.h" "Classes/Level4.cpp" "Classes/Level4.h" "Classes/Level5.cpp" "Classes/Level5.h")
+    add_executable(${APP_NAME} ${all_code_files} "Classes/Player.cpp"   "Classes/Enemy.cpp" "Classes/Enemy.h"   "Classes/LevelMenu.cpp" "Classes/LevelMenu.h" "Classes/GameOver.cpp" "Classes/GameOver.h" "Classes/Level2.cpp" "Classes/Level2.h" "Classes/Level3.cpp" "Classes/Level3.h" "Classes/Level4.cpp" "Classes/Level4.h" "Classes/Level5.cpp" "Classes/Level5.h" "Classes/WinScreen.cpp" "Classes/WinScreen.h")
 else()
     add_library(${APP_NAME} SHARED ${all_code_files})
     add_subdirectory(${COCOS2DX_ROOT_PATH}/cocos/platform/android ${ENGINE_BINARY_PATH}/cocos/platform)

@@ -3,6 +3,7 @@
 #include "Player.h"
 #include "Enemy.h"
 #include "ui/CocosGUI.h"
+#include "WinScreen.h"
 
 USING_NS_CC;
 
@@ -185,7 +186,8 @@ void Level5::onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, Event* event
 }
 
 void Level5::toWin() {
-    CCLOG("YOU WON!!");
+    auto win = WinScreen::createScene();
+    Director::getInstance()->replaceScene(TransitionFade::create(0.5f, win));
 }
 
 bool Level5::onContactBegin(cocos2d::PhysicsContact& contact) {
