@@ -122,9 +122,9 @@ void Level2::update(float dt) {
         
     this->getDefaultCamera()->update(dt);
 
-    player.h1->setPosition(Vec2(player.sprite->getPositionX() - 900, player.sprite->getPositionY() + 650));
-    player.h2->setPosition(Vec2(player.sprite->getPositionX() - 800, player.sprite->getPositionY() + 650));
-    player.h3->setPosition(Vec2(player.sprite->getPositionX() - 700, player.sprite->getPositionY() + 650));
+    player.h1->setPosition(Vec2(getDefaultCamera()->getPositionX() - 900, getDefaultCamera()->getPositionY() + 650));
+    player.h2->setPosition(Vec2(getDefaultCamera()->getPositionX() - 800, getDefaultCamera()->getPositionY() + 650));
+    player.h3->setPosition(Vec2(getDefaultCamera()->getPositionX() - 700, getDefaultCamera()->getPositionY() + 650));
 }
 
 // Implementation of the keyboard event callback function prototype

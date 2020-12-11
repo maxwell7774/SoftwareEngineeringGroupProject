@@ -25,7 +25,7 @@ bool LevelMenu::init()
     {
         return false;
     }
-
+    
     auto background = Sprite::create("res/PNG/Backgrounds/colored_grass.png");
     background->setScale(0.5f);
     background->setPosition(Director::getInstance()->getVisibleSize().width / 2, Director::getInstance()->getVisibleSize().height / 2);

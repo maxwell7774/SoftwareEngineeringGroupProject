@@ -67,10 +67,6 @@ Player::Player(std::string name, std::string color, int x, int y) {
     h1 = Sprite::create("res/PNG/HUD/hudHeart_full.png");
     h2 = Sprite::create("res/PNG/HUD/hudHeart_full.png");
     h3 = Sprite::create("res/PNG/HUD/hudHeart_full.png");
-
-    h1->setPosition(Vec2(sprite->getPositionX() + 400, sprite->getPositionY() + 250));
-    h2->setPosition(Vec2(sprite->getPositionX() + 300, sprite->getPositionY() + 250));
-    h3->setPosition(Vec2(sprite->getPositionX() + 200, sprite->getPositionY() + 250));
 }
 
 int Player::getLives() { return lives; }
