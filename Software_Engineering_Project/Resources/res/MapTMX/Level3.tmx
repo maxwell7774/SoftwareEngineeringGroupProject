@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-up" width="48" height="16" tilewidth="128" tileheight="128" infinite="0" backgroundcolor="#4c99e6" nextlayerid="7" nextobjectid="28">
- <tileset firstgid="1" source="Full Tiles.tsx"/>
+ <tileset firstgid="1" source="Full_Tiles.tsx"/>
  <objectgroup id="5" name="death" visible="0">
   <object id="5" x="2176" y="1954" width="512" height="94"/>
   <object id="6" x="2944" y="1960" width="508" height="86"/>

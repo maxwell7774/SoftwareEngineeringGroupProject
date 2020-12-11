@@ -10,7 +10,7 @@ USING_NS_CC;
 Scene* Level3::createScene()
 {
     auto scene = Level3::create();
-    scene->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
+//    scene->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
     return scene;
 }
 
