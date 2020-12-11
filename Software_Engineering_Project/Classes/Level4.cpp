@@ -33,12 +33,12 @@ bool Level4::init()
     auto visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
-    background = Sprite::create("res/MapTMX/Level2.png");
+    background = Sprite::create("res/MapTMX/Level4.png");
     auto edgeBody = PhysicsBody::createEdgeBox(background->getContentSize(), PhysicsMaterial(0, 0, 0), 3);
     background->addComponent(edgeBody);
     this->addChild(background);
 
-    auto map = TMXTiledMap::create("res/MapTMX/Level2.tmx");
+    auto map = TMXTiledMap::create("res/MapTMX/Level4.tmx");
     auto collisions = map->getObjectGroup("ground_collisions");
     auto enemies = map->getObjectGroup("enemies");
     auto spawn = map->getObjectGroup("spawn");
@@ -101,7 +101,7 @@ bool Level4::init()
     deathNode->getPhysicsBody()->setCollisionBitmask(5);
     deathNode->getPhysicsBody()->setContactTestBitmask(true);
 
-    this->getPhysicsWorld()->setGravity(Vec2(0, -1000));
+    this->getPhysicsWorld()->setGravity(Vec2(0, -5000));
 
     player = Player("Bob", "Green", spawnArr[0].asValueMap()["x"].asInt() - background->getContentSize().width / 2, spawnArr[0].asValueMap()["y"].asInt() - background->getContentSize().height / 2);
 
@@ -196,6 +196,8 @@ bool Level4::onContactBegin(cocos2d::PhysicsContact& contact) {
     }
 
     if ((3 == a->getCollisionBitmask() && 2 == b->getCollisionBitmask()) || (2 == a->getCollisionBitmask() && 3 == b->getCollisionBitmask())) {
+        player.onGround = true;
+        player.switchKey('p');
         CCLOG("On Ground.");
     }
 

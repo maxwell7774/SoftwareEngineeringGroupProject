@@ -100,7 +100,7 @@ bool Level5::init()
     deathNode->getPhysicsBody()->setCollisionBitmask(5);
     deathNode->getPhysicsBody()->setContactTestBitmask(true);
 
-    this->getPhysicsWorld()->setGravity(Vec2(0, -1000));
+    this->getPhysicsWorld()->setGravity(Vec2(0, -5000));
 
     player = Player("Bob", "Green", spawnArr[0].asValueMap()["x"].asInt() - background->getContentSize().width / 2, spawnArr[0].asValueMap()["y"].asInt() - background->getContentSize().height / 2);
 
@@ -182,7 +182,7 @@ void Level5::onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, Event* event
 }
 
 void Level5::toWin() {
-    CCLOG("Go to next Level!");
+    CCLOG("YOU WON!!");
 }
 
 bool Level5::onContactBegin(cocos2d::PhysicsContact& contact) {
@@ -194,6 +194,8 @@ bool Level5::onContactBegin(cocos2d::PhysicsContact& contact) {
     }
 
     if ((3 == a->getCollisionBitmask() && 2 == b->getCollisionBitmask()) || (2 == a->getCollisionBitmask() && 3 == b->getCollisionBitmask())) {
+        player.onGround = true;
+        player.switchKey('p');
         CCLOG("On Ground.");
     }
 
