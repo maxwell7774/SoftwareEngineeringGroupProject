@@ -39,7 +39,7 @@ bool WinScreen::init()
     auto play = MenuItemImage::create("res/PNG/tiles/boxCrate.png", "res/PNG/tiles/boxCrate_double.png", CC_CALLBACK_1(WinScreen::toMainMenu, this));
     play->setScale(2.5, 2.5);
 
-    auto playText = Label::createWithSystemFont("Play Again", "Arial", 90);
+    auto playText = Label::createWithSystemFont("Menu", "Arial", 90);
     playText->setPosition(Vec2(Director::getInstance()->getVisibleSize().width / 2, Director::getInstance()->getVisibleSize().height / 3));
 
     // create menu, it's an autorelease object
