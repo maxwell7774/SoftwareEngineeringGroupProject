@@ -106,7 +106,7 @@ void Player::setActions(std::string dir){
         if(!aPressed){
             aPressed = true;
             dPressed = false;
-            sprite->getPhysicsBody()->setVelocity(Vec2(-450, sprite->getPhysicsBody()->getVelocity().y));
+            sprite->getPhysicsBody()->setVelocity(Vec2(-700, sprite->getPhysicsBody()->getVelocity().y));
         }
     }
     else if(dir == "right"){
@@ -115,7 +115,7 @@ void Player::setActions(std::string dir){
         if(!dPressed){
             dPressed = true;
             aPressed = false;
-            sprite->getPhysicsBody()->setVelocity(Vec2(450, sprite->getPhysicsBody()->getVelocity().y));
+            sprite->getPhysicsBody()->setVelocity(Vec2(700, sprite->getPhysicsBody()->getVelocity().y));
         }
     }
     else if(dir == "jump" && onGround){
@@ -123,13 +123,13 @@ void Player::setActions(std::string dir){
         onGround = false;
         sprite->runAction(RepeatForever::create(animateJump));
         if(aPressed){
-            sprite->getPhysicsBody()->setVelocity(Vec2(-450, 800));
+            sprite->getPhysicsBody()->setVelocity(Vec2(-700, 2000));
         }
         else if(dPressed){
-            sprite->getPhysicsBody()->setVelocity(Vec2(450, 800));
+            sprite->getPhysicsBody()->setVelocity(Vec2(700, 2000));
         }
         else{
-            sprite->getPhysicsBody()->setVelocity(Vec2(0, 800));
+            sprite->getPhysicsBody()->setVelocity(Vec2(0, 2000));
         }
     }
     
