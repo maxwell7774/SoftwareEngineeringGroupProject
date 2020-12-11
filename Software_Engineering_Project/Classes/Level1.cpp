@@ -198,6 +198,8 @@ bool Level1::onContactBegin(cocos2d::PhysicsContact& contact) {
 
     if ((3 == a->getCollisionBitmask() && 2 == b->getCollisionBitmask()) || (2 == a->getCollisionBitmask() && 3 == b->getCollisionBitmask())) {
         CCLOG("On Ground.");
+        player.onGround = true;
+        player.switchKey('p');
     }
 
     if ((9 == a->getCollisionBitmask() && 2 == b->getCollisionBitmask()) || (2 == a->getCollisionBitmask() && 9 == b->getCollisionBitmask())) {

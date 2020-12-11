@@ -9,6 +9,8 @@ Player::Player() {
     aPressed = false;
     dPressed = false;
     spacePressed = false;
+    jumping = false;
+    onGround = true;
 
 	sprite = Sprite::create("res/PNG/Players/128x256/Yellow/alienYellow_stand.png");
 	playerBody = PhysicsBody::createBox(Size(110, 138), PhysicsMaterial(0, 1, 0));
@@ -116,8 +118,9 @@ void Player::setActions(std::string dir){
             sprite->getPhysicsBody()->setVelocity(Vec2(450, sprite->getPhysicsBody()->getVelocity().y));
         }
     }
-    else if(dir == "jump"){
+    else if(dir == "jump" && onGround){
         spacePressed = true;
+        onGround = false;
         sprite->runAction(RepeatForever::create(animateJump));
         if(aPressed){
             sprite->getPhysicsBody()->setVelocity(Vec2(-450, 800));
@@ -143,16 +146,23 @@ void Player::switchKey(char key){
         dPressed = false;
     else if(key == 's'){
         spacePressed = false;
-        if(aPressed)
-            setActions("left");
-        else if(dPressed)
-            setActions("right");
     }
-    if(!aPressed && !dPressed && !spacePressed){
-        sprite->getPhysicsBody()->setVelocity(Vec2(0,0));
+    if(aPressed)
+        setActions("left");
+    else if(dPressed)
+        setActions("right");
+    if((!aPressed && !dPressed && !spacePressed && onGround)||(onGround && spacePressed)){
         stopActions();
         
         auto animateIdle = Animate::create(Animation::createWithSpriteFrames(idle, 0.3f));
         sprite->runAction(RepeatForever::create(animateIdle));
     }
+    if(onGround && !aPressed && !dPressed){
+        sprite->getPhysicsBody()->setVelocity(Vec2(0,0));
+    }
+    if(onGround && aPressed)
+        setActions("left");
+    else if(onGround && dPressed)
+        setActions("right");
+    
 }

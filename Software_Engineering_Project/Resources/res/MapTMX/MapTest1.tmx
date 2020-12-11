@@ -22,7 +22,7 @@
 19,19,19,19,19,19,19,19,19,19,19,19,19,19,19
 </data>
  </layer>
- <objectgroup id="8" name="GroundCollisions">
+ <objectgroup id="8" name="GroundCollisions" visible="0">
   <object id="11" x="122.665" y="259.933" width="645.452" height="37.9678"/>
   <object id="12" x="642.531" y="771.037" width="633.769" height="35.0472"/>
   <object id="13" x="1416.49" y="1153.64" width="499.422" height="37.9678"/>

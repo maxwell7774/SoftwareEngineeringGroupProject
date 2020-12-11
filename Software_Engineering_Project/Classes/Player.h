@@ -20,6 +20,7 @@ public:
 	std::string color;
 	Sprite* sprite;
 	PhysicsBody* playerBody;
+    bool onGround, jumping;
 
 	Vector<SpriteFrame*> walk;
 	Vector<SpriteFrame*> jump;
