@@ -55,7 +55,7 @@ bool Level5::init()
     deathNode->addComponent(deathBounds);
     this->addChild(deathNode);
 
-    key = Sprite::create("res/PNG/Items/keyBlue.png");
+    key = Sprite::create("res/PNG/Items/star.png");
     keyBody = PhysicsBody::createBox(Size(128, 128), PhysicsMaterial(0, 1, 0));
     key->setPhysicsBody(keyBody);
     key->getPhysicsBody()->setCollisionBitmask(9);

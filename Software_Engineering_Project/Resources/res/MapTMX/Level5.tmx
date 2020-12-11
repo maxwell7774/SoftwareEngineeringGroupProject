@@ -14,7 +14,7 @@
    <point/>
   </object>
  </objectgroup>
- <layer id="1" name="ground" width="16" height="128">
+ <layer id="1" name="ground" width="16" height="128" visible="0">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
