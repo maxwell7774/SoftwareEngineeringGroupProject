@@ -1,12 +1,12 @@
-#ifndef LEVEL2_H
-#define LEVEL2_H
+#ifndef LEVEL4_H
+#define LEVEL4_H
 #include "cocos2d.h"
 #include "ui/CocosGUI.h"
 #include "Player.h"
 #include "Enemy.h"
 
 
-class Level2 : public cocos2d::Scene
+class Level4 : public cocos2d::Scene
 {
 public:
     static cocos2d::Scene* createScene();
@@ -14,8 +14,8 @@ public:
 
     virtual bool init();
     void update(float);
-    void toLevel3();
-    CREATE_FUNC(Level2);
+    void toLevel5();
+    CREATE_FUNC(Level4);
     Player player;
     Sprite* background;
     cocos2d::ui::Button* forwardbtn;
@@ -37,3 +37,4 @@ private:
 };
 
 #endif
+
