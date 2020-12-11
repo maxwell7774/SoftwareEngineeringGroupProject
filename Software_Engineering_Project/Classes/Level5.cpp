@@ -100,7 +100,7 @@ bool Level5::init()
     deathNode->getPhysicsBody()->setCollisionBitmask(5);
     deathNode->getPhysicsBody()->setContactTestBitmask(true);
 
-    this->getPhysicsWorld()->setGravity(Vec2(0, -5000));
+    this->getPhysicsWorld()->setGravity(Vec2(0, -1 000));
 
     player = Player("Bob", "Green", spawnArr[0].asValueMap()["x"].asInt() - background->getContentSize().width / 2, spawnArr[0].asValueMap()["y"].asInt() - background->getContentSize().height / 2);
 
@@ -120,6 +120,8 @@ bool Level5::init()
 
     auto contactListener = EventListenerPhysicsContact::create();
     contactListener->onContactBegin = CC_CALLBACK_1(Level5::onContactBegin, this);
+    contactListener->onContactSeparate = CC_CALLBACK_1(Level5::onContactSeperate, this);
+
     this->getEventDispatcher()->addEventListenerWithSceneGraphPriority(contactListener, this);
 
     this->scheduleUpdate();
@@ -210,5 +212,18 @@ bool Level5::onContactBegin(cocos2d::PhysicsContact& contact) {
         log("death");
     }
 
+    return true;
+}
+
+bool Level5::onContactSeperate(cocos2d::PhysicsContact& contact) {
+    PhysicsBody* a = contact.getShapeA()->getBody();
+    PhysicsBody* b = contact.getShapeB()->getBody();
+
+    if ((3 == a->getCollisionBitmask() && 2 == b->getCollisionBitmask()) || (2 == a->getCollisionBitmask() && 3 == b->getCollisionBitmask())) {
+        CCLOG("On Ground.");
+        player.onGround = false;
+        player.switchKey('p');
+    }
+    
     return true;
 }

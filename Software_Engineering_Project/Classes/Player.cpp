@@ -120,7 +120,6 @@ void Player::setActions(std::string dir){
     }
     else if(dir == "jump" && onGround){
         spacePressed = true;
-        onGround = false;
         sprite->runAction(RepeatForever::create(animateJump));
         if(aPressed){
             sprite->getPhysicsBody()->setVelocity(Vec2(-700, 2000));

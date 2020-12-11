@@ -122,6 +122,7 @@ bool Level1::init()
 
     auto contactListener = EventListenerPhysicsContact::create();
     contactListener->onContactBegin = CC_CALLBACK_1(Level1::onContactBegin, this);
+    contactListener->onContactSeparate = CC_CALLBACK_1(Level1::onContactSeperate, this);
     this->getEventDispatcher()->addEventListenerWithSceneGraphPriority(contactListener, this);
 
 	this->scheduleUpdate();
@@ -211,6 +212,19 @@ bool Level1::onContactBegin(cocos2d::PhysicsContact& contact) {
         player.subtractLife();
         player.subtractLife();
         log("death");
+    }
+    
+    return true;
+}
+
+bool Level1::onContactSeperate(cocos2d::PhysicsContact& contact) {
+    PhysicsBody* a = contact.getShapeA()->getBody();
+    PhysicsBody* b = contact.getShapeB()->getBody();
+
+    if ((3 == a->getCollisionBitmask() && 2 == b->getCollisionBitmask()) || (2 == a->getCollisionBitmask() && 3 == b->getCollisionBitmask())) {
+        CCLOG("On Ground.");
+        player.onGround = false;
+        player.switchKey('p');
     }
     
     return true;
