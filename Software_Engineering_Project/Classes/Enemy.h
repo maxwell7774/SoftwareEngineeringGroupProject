@@ -21,9 +21,9 @@ public:
 	Vector<SpriteFrame*> move;
 
 	Animate* animateMove;
-	MoveBy* flyUp = MoveBy::create(4.0f, Vec2(0, 256));
-	MoveBy* flyDown = MoveBy::create(4.0f, Vec2(0, -256));
-	DelayTime* wait = DelayTime::create(5.0f);
+	MoveBy* flyUp = MoveBy::create(2.0f, Vec2(0, 256));
+	MoveBy* flyDown = MoveBy::create(2.0f, Vec2(0, -256));
+	DelayTime* wait = DelayTime::create(2.0f);
 
 	Sequence* flyAround = Sequence::create(flyUp, wait, flyDown, wait, nullptr);
 
