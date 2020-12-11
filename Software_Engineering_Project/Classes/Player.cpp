@@ -2,8 +2,8 @@
 #include "GameOver.h"
 
 Player::Player() {
-	x = 300;
-	y = 600;
+	int x = 300;
+	int y = 600;
 	lives = 3;
 	color = "Yellow";
     aPressed = false;
@@ -37,12 +37,10 @@ Player::Player() {
 	h3->setPosition(Vec2(sprite->getPositionX() - 700, sprite->getPositionY() - 650));
 }
 
-Player::Player(std::string name, std::string color) {
-    x = 300;
-    y = 300;
+Player::Player(std::string name, std::string color, int x, int y) {
     lives = 3;
     this->name = name;
-	this->color = color;
+    this->color = color;
     aPressed = false;
     dPressed = false;
     spacePressed = false;
@@ -55,7 +53,6 @@ Player::Player(std::string name, std::string color) {
     sprite->setPosition( x, y );
     sprite->getPhysicsBody()->setCollisionBitmask(2);
     sprite->getPhysicsBody()->setContactTestBitmask(true);
-
 
     walk.pushBack(SpriteFrame::create("res/PNG/Players/128x256/" + color + "/alien" + color + "_walk1.png", Rect(0, 0, sprite->getContentSize().width, sprite->getContentSize().height)));
     walk.pushBack(SpriteFrame::create("res/PNG/Players/128x256/" + color + "/alien" + color + "_walk2.png", Rect(0, 0, sprite->getContentSize().width, sprite->getContentSize().height)));
@@ -77,8 +74,6 @@ Player::Player(std::string name, std::string color) {
 }
 
 int Player::getLives() { return lives; }
-int Player::getX() { return x; }
-int Player::getY() { return y; }
 void Player::subtractLife() {
 	if (isAlive()) {
 		lives--;

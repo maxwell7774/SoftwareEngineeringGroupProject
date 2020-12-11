@@ -11,7 +11,7 @@ USING_NS_CC;
 class Player {
 
 private:
-	int lives, x, y;
+    int lives;
     bool aPressed, dPressed, spacePressed;
 	std::string name;
 	
@@ -26,11 +26,9 @@ public:
 	Vector<SpriteFrame*> idle;
 
 	Player();
-	Player(std::string name, std::string color);
+	Player(std::string name, std::string color, int x, int y);
 
 	int getLives();
-	int getX();
-	int getY();
 	
 	void subtractLife();
 	bool isAlive();

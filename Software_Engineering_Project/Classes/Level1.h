@@ -17,7 +17,7 @@ public:
     void toLevel2();
     CREATE_FUNC(Level1);
     Player player;
-    Enemy e1;
+    Sprite* background;
     cocos2d::ui::Button* forwardbtn;
     cocos2d::ui::Button* backbtn;
     cocos2d::ui::Button* jumpbtn;
