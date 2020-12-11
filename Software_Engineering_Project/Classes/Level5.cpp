@@ -100,7 +100,7 @@ bool Level5::init()
     deathNode->getPhysicsBody()->setCollisionBitmask(5);
     deathNode->getPhysicsBody()->setContactTestBitmask(true);
 
-    this->getPhysicsWorld()->setGravity(Vec2(0, -1 000));
+    this->getPhysicsWorld()->setGravity(Vec2(0, -1000));
 
     player = Player("Bob", "Green", spawnArr[0].asValueMap()["x"].asInt() - background->getContentSize().width / 2, spawnArr[0].asValueMap()["y"].asInt() - background->getContentSize().height / 2);
 
