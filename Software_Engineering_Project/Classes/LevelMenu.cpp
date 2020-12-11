@@ -1,5 +1,6 @@
 #include "LevelMenu.h"
 #include "Level1.h"
+#include "Level2.h"
 #include "GameOver.h"
 #include "MainMenu.h"
 USING_NS_CC;
@@ -82,7 +83,8 @@ void LevelMenu::toLevel1(cocos2d::Ref* pSender) {
     Director::getInstance()->replaceScene(TransitionFade::create(0.5f, level1));
 }
 void LevelMenu::toLevel2(cocos2d::Ref* pSender) {
-
+    auto level2 = Level2::createScene();
+    Director::getInstance()->replaceScene(TransitionFade::create(0.5f, level2));
 }
 void LevelMenu::toLevel3(cocos2d::Ref* pSender) {
 
