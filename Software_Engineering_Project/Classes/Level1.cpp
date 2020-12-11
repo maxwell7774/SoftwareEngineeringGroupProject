@@ -29,68 +29,88 @@ bool Level1::init()
         return false;
     }
     
-        auto visibleSize = Director::getInstance()->getVisibleSize();
-        Vec2 origin = Director::getInstance()->getVisibleOrigin();
+    auto visibleSize = Director::getInstance()->getVisibleSize();
+    Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
-        background = Sprite::create("res/MapTMX/Level1.png");
-        auto edgeBody = PhysicsBody::createEdgeBox(background->getContentSize(), PhysicsMaterial(0,0,0), 3);
-        background->addComponent(edgeBody);
-        this->addChild(background);
-        
-        auto map = TMXTiledMap::create("res/MapTMX/Level1.tmx");
-        auto collisions = map->getObjectGroup("ground_collisions");
-        auto enemies = map->getObjectGroup("enemies");
-        auto spawn = map->getObjectGroup("spawn");
-        auto keyGroup = map->getObjectGroup("key");
-        auto collisionsArr = collisions->getObjects();
-        auto enemiesArr = enemies->getObjects();
-        auto spawnArr = spawn->getObjects();
-        auto keyArr = keyGroup->getObjects();
-        key = Sprite::create("res/PNG/Items/keyBlue.png");
-        keyBody = PhysicsBody::createBox(Size(128, 128), PhysicsMaterial(0, 1, 0));
-        key->setPhysicsBody(keyBody);
-        key->getPhysicsBody()->setCollisionBitmask(9);
-        key->getPhysicsBody()->setContactTestBitmask(true);
-        key->setPosition(Vec2(keyArr[0].asValueMap()["x"].asInt()-background->getContentSize().width/2, keyArr[0].asValueMap()["y"].asInt()-background->getContentSize().height/2));
-        this->addChild(key);
-        
-        for(int i = 0; i < collisionsArr.size(); i++){
-            int x = collisionsArr[i].asValueMap()["x"].asInt();
-            int y = collisionsArr[i].asValueMap()["y"].asInt();
-            int width = collisionsArr[i].asValueMap()["width"].asInt();
-            int height = collisionsArr[i].asValueMap()["height"].asInt();
-            auto shape = PhysicsShapeBox::create(Size(width, height), PhysicsMaterial(0,0,0), Vec2(x-(background->getContentSize().width/2)+width/2, y-(background->getContentSize().height/2)+height/2));
-            background->getPhysicsBody()->addShape(shape);
-        }
-        
-        for(int i = 0; i < enemiesArr.size(); i++){
-            int x = enemiesArr[i].asValueMap()["x"].asInt();
-            int y = enemiesArr[i].asValueMap()["y"].asInt();
-            auto enemy = Enemy();
-            enemy.playerBody->setGravityEnable(false);
-            
-            enemy.sprite->setPosition(Vec2(x-background->getContentSize().width/2, y-background->getContentSize().height/2));
-            
-            this->addChild(enemy.sprite);
-            
-            enemy.sprite->runAction(RepeatForever::create(enemy.animateMove));
-            enemy.sprite->runAction(RepeatForever::create(enemy.flyAround));
-        }
-        
-        background->getPhysicsBody()->setCollisionBitmask(3);
-        background->getPhysicsBody()->setContactTestBitmask(true);
-
-        this->getPhysicsWorld()->setGravity(Vec2(0,-1000));
-
-        player = Player("Bob", "Green", spawnArr[0].asValueMap()["x"].asInt()-background->getContentSize().width/2, spawnArr[0].asValueMap()["y"].asInt()-background->getContentSize().height/2);
+    background = Sprite::create("res/MapTMX/Level1.png");
+    auto edgeBody = PhysicsBody::createEdgeBox(background->getContentSize(), PhysicsMaterial(0,0,0), 3);
+    background->addComponent(edgeBody);
+    this->addChild(background);
     
-        this->addChild(player.sprite);
-        getDefaultCamera()->setPosition(player.sprite->getPosition());
+    auto map = TMXTiledMap::create("res/MapTMX/Level1.tmx");
+    auto collisions = map->getObjectGroup("ground_collisions");
+    auto enemies = map->getObjectGroup("enemies");
+    auto spawn = map->getObjectGroup("spawn");
+    auto keyGroup = map->getObjectGroup("key");
+    auto death = map->getObjectGroup("death");
+    auto collisionsArr = collisions->getObjects();
+    auto enemiesArr = enemies->getObjects();
+    auto spawnArr = spawn->getObjects();
+    auto keyArr = keyGroup->getObjects();
+    auto deathArr = death->getObjects();
+    
+    auto deathNode = Node::create();
+    auto deathBounds = PhysicsBody::create();
+    deathBounds->setDynamic(false);
+    deathNode->addComponent(deathBounds);
+    this->addChild(deathNode);
+
+    key = Sprite::create("res/PNG/Items/keyBlue.png");
+    keyBody = PhysicsBody::createBox(Size(128, 128), PhysicsMaterial(0, 1, 0));
+    key->setPhysicsBody(keyBody);
+    key->getPhysicsBody()->setCollisionBitmask(9);
+    key->getPhysicsBody()->setContactTestBitmask(true);
+    key->setPosition(Vec2(keyArr[0].asValueMap()["x"].asInt()-background->getContentSize().width/2, keyArr[0].asValueMap()["y"].asInt()-background->getContentSize().height/2));
+    this->addChild(key);
+    
+    for(int i = 0; i < collisionsArr.size(); i++){
+        int x = collisionsArr[i].asValueMap()["x"].asInt();
+        int y = collisionsArr[i].asValueMap()["y"].asInt();
+        int width = collisionsArr[i].asValueMap()["width"].asInt();
+        int height = collisionsArr[i].asValueMap()["height"].asInt();
+        auto shape = PhysicsShapeBox::create(Size(width, height), PhysicsMaterial(0,0,0), Vec2(x-(background->getContentSize().width/2)+width/2, y-(background->getContentSize().height/2)+height/2));
+        background->getPhysicsBody()->addShape(shape);
+    }
+    
+    for(int i = 0; i < enemiesArr.size(); i++){
+        int x = enemiesArr[i].asValueMap()["x"].asInt();
+        int y = enemiesArr[i].asValueMap()["y"].asInt();
+        auto enemy = Enemy();
+        enemy.playerBody->setGravityEnable(false);
         
-        this->addChild(player.h1);
-        this->addChild(player.h2);
-        this->addChild(player.h3);
+        enemy.sprite->setPosition(Vec2(x-background->getContentSize().width/2, y-background->getContentSize().height/2));
         
+        this->addChild(enemy.sprite);
+        
+        enemy.sprite->runAction(RepeatForever::create(enemy.animateMove));
+        enemy.sprite->runAction(RepeatForever::create(enemy.flyAround));
+    }
+
+    for(int i = 0; i < deathArr.size(); i++){
+        int x = deathArr[i].asValueMap()["x"].asInt();
+        int y = deathArr[i].asValueMap()["y"].asInt();
+        int width = deathArr[i].asValueMap()["width"].asInt();
+        int height = deathArr[i].asValueMap()["height"].asInt();
+        auto shape = PhysicsShapeBox::create(Size(width, height), PhysicsMaterial(0,0,0), Vec2(x-(background->getContentSize().width/2)+width/2, y-(background->getContentSize().height/2)+height/2));
+        deathNode->getPhysicsBody()->addShape(shape);
+    }
+    
+    background->getPhysicsBody()->setCollisionBitmask(3);
+    background->getPhysicsBody()->setContactTestBitmask(true);
+    deathNode->getPhysicsBody()->setCollisionBitmask(5);
+    deathNode->getPhysicsBody()->setContactTestBitmask(true);
+
+    this->getPhysicsWorld()->setGravity(Vec2(0,-1000));
+
+    player = Player("Bob", "Green", spawnArr[0].asValueMap()["x"].asInt()-background->getContentSize().width/2, spawnArr[0].asValueMap()["y"].asInt()-background->getContentSize().height/2);
+
+    this->addChild(player.sprite);
+    getDefaultCamera()->setPosition(player.sprite->getPosition());
+    
+    this->addChild(player.h1);
+    this->addChild(player.h2);
+    this->addChild(player.h3);
+    
     
 
     // creating a keyboard event listener
@@ -184,5 +204,12 @@ bool Level1::onContactBegin(cocos2d::PhysicsContact& contact) {
         toLevel2();
     }
 
+    if ((5 == a->getCollisionBitmask() && 2 == b->getCollisionBitmask()) || (2 == a->getCollisionBitmask() && 5 == b->getCollisionBitmask())) {
+        player.subtractLife();
+        player.subtractLife();
+        player.subtractLife();
+        log("death");
+    }
+    
     return true;
 }
