@@ -163,6 +163,7 @@ void Level5::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, Event* event)
         player.setActions("right");
         break;
     case EventKeyboard::KeyCode::KEY_SPACE:
+            player.jumping = true;
         player.setActions("jump");
         break;
     }

@@ -118,8 +118,9 @@ void Player::setActions(std::string dir){
             sprite->getPhysicsBody()->setVelocity(Vec2(700, sprite->getPhysicsBody()->getVelocity().y));
         }
     }
-    else if(dir == "jump" && onGround){
+    else if(dir == "jump" && !jumping){
         spacePressed = true;
+        jumping = true;
         sprite->runAction(RepeatForever::create(animateJump));
         if(aPressed){
             sprite->getPhysicsBody()->setVelocity(Vec2(-700, 2000));
@@ -157,11 +158,16 @@ void Player::switchKey(char key){
         sprite->runAction(RepeatForever::create(animateIdle));
     }
     if(onGround && !aPressed && !dPressed){
+        jumping = false;
         sprite->getPhysicsBody()->setVelocity(Vec2(0,0));
     }
-    if(onGround && aPressed)
+    if(onGround && aPressed){
+        jumping = false;
         setActions("left");
-    else if(onGround && dPressed)
+    }
+    else if(onGround && dPressed){
+        jumping = false;
         setActions("right");
+    }
     
 }
