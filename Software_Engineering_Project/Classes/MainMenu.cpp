@@ -1,5 +1,6 @@
 #include "MainMenu.h"
 #include "LevelMenu.h"
+#include "AudioEngine.h"
 
 USING_NS_CC;
 
@@ -47,6 +48,11 @@ bool MainMenu::init()
     menu->setPosition(Vec2(Director::getInstance()->getVisibleSize().width / 2, Director::getInstance()->getVisibleSize().height / 3));
     this->addChild(menu);
     this->addChild(playText);
+
+    int backGroundMusic = AudioEngine::play2d("res/audio/Wehrmut.mp3");
+    AudioEngine::setLoop(backGroundMusic, true);
+    AudioEngine::setVolume(backGroundMusic, 0.2f);
+    AudioEngine::setMaxAudioInstance(1);
 
     return true;
 }
