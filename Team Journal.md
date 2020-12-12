@@ -101,3 +101,22 @@ ___
 
 ### Notes:
 - Started and completed the first version of the Testing Documentation, and came up with our testing plan. 
+___
+
+## Purpose for this meeting: Worked on Completing the project Evaluation
+### Date/Time: 12/11/2020  12:00am
+
+### Attendees: Bryce Mecham, Adam Maxwell, Yucheng Long
+
+### Notes:
+- Worked on Completing the project evaluation we can submit onve Yucheng finishes his part of the reflections.
+___
+
+## Purpose for this meeting: Finish up Testing Documentation pt 2
+### Date/Time: 12/11/2020  6:30pm
+
+### Attendees: Bryce Mecham, Adam Maxwell
+
+### Notes:
+- Added our results to the testing documentation.
+- Should be done with the group project besides the presentation.
